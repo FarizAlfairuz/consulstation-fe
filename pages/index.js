@@ -1,82 +1,87 @@
-import Head from 'next/head'
+import Container, { HeroCard, TestiCard } from "components/Container";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="">
+      <Container bgColor="bg-gray-300">
+        <div className="max-w-3xl flex flex-col space-y-4">
+          <h1 className="font-poppins text-4xl font-bold">
+            Your on-the-go Business Consultant
+          </h1>
+          <h4 className="font-nunito text-2xl">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet quis
+            quam duis consequat etiam ornare pulvinar.
+          </h4>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <div className="flex space-x-4 ">
+            <HeroCard
+              image="https://media.istockphoto.com/vectors/search-magnifying-glass-icon-symbol-vector-id1221635138"
+              title="Search Consultants"
+            />
+            <HeroCard
+              image="https://media.istockphoto.com/vectors/search-magnifying-glass-icon-symbol-vector-id1221635138"
+              title="Chatting with Consultants"
+            />
+          </div>
         </div>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
+      </Container>
+      <Container>
+        <div className="max-w-3xl flex flex-col space-y-4">
+          <h1 className="font-poppins text-4xl font-bold">Why Choose Us?</h1>
+          <h4 className="font-nunito text-2xl">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet quis
+            quam duis consequat etiam ornare pulvinar.
+          </h4>
+        </div>
+        <div className="mt-4 hidden lg:flex lg:space-x-4 ">
+          <img
+            className="max-h-60"
+            src="https://i.kym-cdn.com/entries/icons/facebook/000/023/977/cover3.jpg"
+            alt="vector"
+          />
+          <img
+            className="max-h-60"
+            src="https://i.kym-cdn.com/entries/icons/facebook/000/023/977/cover3.jpg"
+            alt="vector"
+          />
+        </div>
+      </Container>
+      <Container bgColor="bg-gray-300">
+        <div className="flex justify-center space-x-10">
+          <img
+            className="max-h-72"
+            src="https://www.valentiam.com/hubfs/Images/Blog/What-Does-A-Transfer-Pricing-Consultant-Deliver.jpg"
+            alt="consultant"
+          />
+          <div className="max-w-3xl flex flex-col space-y-4 justify-center">
+            <h1 className="font-poppins text-4xl font-bold">
+              Become a Consultant
+            </h1>
+            <h4 className="font-nunito text-2xl">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet quis
+              quam duis consequat etiam ornare pulvinar.
+            </h4>
+            <div>
+              <button>Start Today</button>
+            </div>
+          </div>
+        </div>
+      </Container>
+      <Container>
+        <div className="max-w-3xl flex flex-col space-y-4">
+          <h1 className="font-poppins text-4xl font-bold">Testimonials</h1>
+          <h4 className="font-nunito text-2xl">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet quis
+            quam duis consequat etiam ornare pulvinar.
+          </h4>
+        </div>
+        <div className="flex mt-6 space-x-4 justify-start">
+          <TestiCard />
+          <TestiCard />
+          <TestiCard />
+          <TestiCard />
+        </div>
+      </Container>
     </div>
-  )
+  );
 }
