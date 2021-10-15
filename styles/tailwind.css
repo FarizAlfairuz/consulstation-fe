@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Nunito Sans";
+}
+
+.text-heading-1 {
+  @apply text-3xl sm:text-4xl lg:text-5xl 2xl:text-6xl;
+}
+
+.text-heading-2 {
+  @apply text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl;
+}
+
+.text-heading-3 {
+  @apply text-lg sm:text-xl lg:text-2xl;
+}
+
+.text-paragraph-heading {
+  @apply text-lg sm:text-xl lg:text-2xl;
+}
+
+.text-paragraph-1 {
+  @apply text-sm sm:text-base lg:text-lg 2xl:text-xl font-medium;
+}
+
+.text-paragraph-2 {
+  @apply text-xs sm:text-sm lg:text-base 2xl:text-lg;
+}
