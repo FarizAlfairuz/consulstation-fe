@@ -1,42 +1,46 @@
 import AuthForm from "components/AuthForm";
 import Button from "components/Button";
 import Layout from "components/Layout";
-import { useRegister } from "hooks/user/useAuth";
+import Link from "next/link"
+import { useLogin } from "hooks/user/useAuth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().required().min(8),
-  confirmPassword: yup.string().required().min(8).oneOf([yup.ref("password"), null], "Password not same"),
   username: yup.string().required(),
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
+  password: yup.string().required().min(8),
 });
 
 const registerForm = [
   { type: "text", placeholder: "Username", name: "username" },
-  { type: "email", placeholder: "Email", name: "email" },
   { type: "password", placeholder: "Password", name: "password" },
-  { type: "password", placeholder: "Confirm Password", name: "confirmPassword" },
 ];
 
-function RegisterPage() {
+function LoginPage() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
-    mode: "onTouched"
-  })
+    mode: "onTouched",
+  });
 
-  const { state, registerSubmit } = useRegister()
+  const { state, loginSubmit } = useLogin();
+
+  console.log(state)
 
   return (
     <Layout padding="py-32">
-      <div className="flex space-x-10">
+      <div className="flex space-x-12 ">
         <div className="flex flex-col space-y-8  w-1/2">
           <div className="text-heading-1 font-black">
-            <h1>Sign Up to</h1>
+            <h1>Sign In to</h1>
             <h1>Consulstation</h1>
+          </div>
+          <div className="font-nunito font-bold">
+            <p>if you don't have an account,</p>
+            <div className="flex space-x-1">
+              <p>You can </p>
+              <Link href="/sign-up"><a className="text-yellow-400">Register here!</a></Link>
+            </div>
           </div>
           <img
             className="w-full"
@@ -45,13 +49,7 @@ function RegisterPage() {
           />
         </div>
         <div className="flex flex-col w-1/2 items-start ">
-          <form className="flex flex-col w-5/6 space-y-6 " onSubmit={handleSubmit(registerSubmit)}>
-
-            <div className="space-x-6 flex flex-row w-full">
-              <AuthForm type="text" placeholder="First Name" name="firstName" error={errors} register={register} />
-              <AuthForm type="text" placeholder="Last Name" name="lastName" error={errors} register={register} />
-            </div>
-
+          <form className="flex flex-col w-4/5 space-y-6" onSubmit={handleSubmit(loginSubmit)} >
             {registerForm.map((input, index) => (
               <AuthForm
                 key={index}
@@ -63,7 +61,9 @@ function RegisterPage() {
                 register={register}
               />
             ))}
-            <Button type="submit" padding="py-3 px-5" disabled={state.disabled} >Sign Up</Button>
+            <Button type="submit" padding="py-3 px-5" disabled={state.disabled} >
+              Sign In
+            </Button>
           </form>
         </div>
       </div>
@@ -71,4 +71,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default LoginPage;

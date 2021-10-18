@@ -1,5 +1,5 @@
 function AuthForm(props) {
-  const { id, name, type, placeholder, error, register, required, disabled } = props;
+  const { id, name, type, placeholder, error, register, required, disabled, width } = props;
   return (
     <div id={id}>
       <input
@@ -7,7 +7,7 @@ function AuthForm(props) {
         name={name}
         placeholder={placeholder}
         disabled={disabled}
-        className={`py-3 px-6 bg-gray-100 rounded-lg w-full focus:outline-none `}
+        className={`flex flex-grow py-3 px-6 bg-gray-100 rounded-lg ${width} focus:outline-none font-nunito text-sm font-bold disabled:opacity-60`}
         { ...register(name, { ...required }) }
       />
       <div>
@@ -19,6 +19,10 @@ function AuthForm(props) {
       </div>
     </div>
   );
+}
+
+AuthForm.defaultProps = {
+  width: "w-full"
 }
 
 export default AuthForm;

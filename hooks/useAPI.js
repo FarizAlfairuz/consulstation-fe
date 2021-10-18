@@ -4,6 +4,7 @@ const initialState = {
   loading: true,
   error: "",
   data: {},
+  disabled: false
 };
 
 const reducer = (state, action) => {
@@ -13,12 +14,21 @@ const reducer = (state, action) => {
         loading: false,
         error: "",
         data: action.payload,
+        disabled: false
       };
     case "FETCH_FAILED":
       return {
         loading: false,
         error: "Something went wrong!",
         data: {},
+        disabled: false
+      };
+      case "REQUEST":
+      return {
+        loading: true,
+        error: "",
+        data: {},
+        disabled: true
       };
     case "RESET":
       return initialState;

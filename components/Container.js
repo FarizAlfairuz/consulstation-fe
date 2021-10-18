@@ -1,6 +1,12 @@
 function Container(props) {
   const { children, bgColor } = props;
-  return <div className={`py-20 px-40 ${bgColor}`}>{children}</div>;
+  return (
+    <div className={`w-full py-20 ${bgColor}`}>
+      <div className="w-4/5 mx-auto">
+        {children}
+      </div>
+    </div>
+  );
 }
 
 Container.defaultProps = {
@@ -30,7 +36,7 @@ export const TestiCard = () => {
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper tempor
         et tortor, aliquet aliquam nunc. Vitae risus vulputate vivamus ut. Ut
-        sed dui, dolor sit dui vel.{" "}
+        sed dui, dolor sit dui vel.
       </p>
     </div>
   );

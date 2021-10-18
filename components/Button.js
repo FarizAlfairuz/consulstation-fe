@@ -1,12 +1,19 @@
+import { PulseLoader } from "react-spinners"
+
 function Button(props) {
-  const { onClick, children, size, color, textColor, border, padding, type } = props;
+  const { onClick, children, size, color, textColor, border, padding, type, disabled } = props;
   return (
     <button
       type={type}
-      className={`font-nunito font-bold ${size} ${color} ${textColor} ${border} ${padding} rounded-md`}
+      className={`font-nunito font-bold ${size} ${color} ${textColor} ${border} ${padding} rounded-md disabled:opacity-50`}
       onClick={onClick}
+      disabled={disabled}
     >
-      {children}
+      {disabled ? (
+        <div className="flex justify-center">
+          <PulseLoader size={5} color="white"/>
+        </div>
+      ) : children}
     </button>
   );
 }
