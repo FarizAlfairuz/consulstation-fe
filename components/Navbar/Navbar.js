@@ -1,7 +1,11 @@
-import Button from "./Button";
+// import Button from "../Button";
 import Link from "next/link";
+// import Cookie from "js-cookie";
+import dynamic from "next/dynamic"
 
 function Navbar() {
+  const LogStatus = dynamic(() => import('components/Navbar/LogStatus'))
+  // const logged = Cookie.get("logged");
   return (
     <nav className="w-full sticky top-0 z-20  py-8 bg-white shadow-md">
       <div className="w-4/5 mx-auto flex justify-between items-center">
@@ -22,22 +26,7 @@ function Navbar() {
             <li>Help</li>
           </ul>
         </div>
-        <div className="w-2/6 flex justify-center items-center space-x-2">
-          <Button
-            color="bg-white"
-            textColor="text-black"
-            border="border border-black"
-          >
-            <Link href="/sign-in">
-              <a>Sign In</a>
-            </Link>
-          </Button>
-          <Button>
-            <Link href="/sign-up">
-              <a>Sign Up</a>
-            </Link>
-          </Button>
-        </div>
+        <LogStatus />
       </div>
     </nav>
   );

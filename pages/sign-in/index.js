@@ -1,4 +1,4 @@
-import AuthForm from "components/AuthForm";
+import AuthForm from "components/Forms/AuthForm";
 import Button from "components/Button";
 import Layout from "components/Layout";
 import Link from "next/link"
@@ -25,7 +25,7 @@ function LoginPage() {
 
   const { state, loginSubmit } = useLogin();
 
-  console.log(state)
+  // console.log(state)
 
   return (
     <Layout padding="py-32">

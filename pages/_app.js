@@ -1,6 +1,6 @@
 import "tailwindcss/tailwind.css";
 import "styles/tailwind.css";
-import Navbar from "components/Navbar";
+import Navbar from "components/Navbar/Navbar";
 import Footer from "components/Footer";
 import Head from 'next/head'
 

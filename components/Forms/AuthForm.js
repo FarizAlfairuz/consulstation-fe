@@ -7,10 +7,10 @@ function AuthForm(props) {
         name={name}
         placeholder={placeholder}
         disabled={disabled}
-        className={`flex flex-grow py-3 px-6 bg-gray-100 rounded-lg ${width} focus:outline-none font-nunito text-sm font-bold disabled:opacity-60`}
+        className={`flex flex-grow py-3 px-6 bg-gray-200 rounded-lg ${width} focus:outline-none font-nunito text-sm font-bold disabled:opacity-60`}
         { ...register(name, { ...required }) }
       />
-      <div>
+      <div className="h-1 px-1">
         {error[name] && (
           <p className="text-xs text-red-600 break-words">
             {error[name].message}

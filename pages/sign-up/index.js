@@ -1,4 +1,4 @@
-import AuthForm from "components/AuthForm";
+import AuthForm from "components/Forms/AuthForm";
 import Button from "components/Button";
 import Layout from "components/Layout";
 import { useRegister } from "hooks/user/useAuth";
