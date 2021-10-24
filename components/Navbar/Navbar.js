@@ -21,7 +21,11 @@ function Navbar() {
                 <a>Home</a>
               </Link>
             </li>
-            <li>Consultant</li>
+            <li>
+              <Link href="/consultants">
+                <a>Consultants</a>
+              </Link>
+            </li>
             <li>Contact Us</li>
             <li>Help</li>
           </ul>

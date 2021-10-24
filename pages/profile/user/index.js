@@ -9,12 +9,6 @@ import useProfile from "hooks/user/useProfile";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
-  password: yup.string().required().min(8),
-  confirmPassword: yup
-    .string()
-    .required()
-    .min(8)
-    .oneOf([yup.ref("password"), null], "Password not same"),
   username: yup.string().required(),
   firstName: yup.string().required(),
   lastName: yup.string().required(),
@@ -26,7 +20,8 @@ const profileForm = [
 ];
 
 function UserProfilePage() {
-  const { state } = useProfile();
+  const { state, editProfile } = useProfile();
+  const [isEditing, setIsEditing] = useState(false);
 
   const {
     register,
@@ -59,13 +54,17 @@ function UserProfilePage() {
         </div>
       </div>
       <div className="space-y-5 mt-10">
-        <form className="bg-gray-300 p-6 rounded-lg">
+        <form
+          className="bg-gray-300 p-6 rounded-lg"
+          onSubmit={handleSubmit(editProfile)}
+        >
           <div className="flex justify-between items-center space-x-3 ">
             <div className="flex space-x-3 ">
               <ProfileForm
                 type="text"
                 label="First Name"
                 name="firstName"
+                disabled={!isEditing}
                 error={errors}
                 register={register}
               />
@@ -73,14 +72,30 @@ function UserProfilePage() {
                 type="text"
                 label="Last Name"
                 name="lastName"
+                disabled={!isEditing}
                 error={errors}
                 register={register}
               />
             </div>
             <div>
-              <Button color="bg-white" textColor="text-black">
-                Edit Profile
-              </Button>
+              {isEditing ? (
+                <Button
+                  color="bg-white"
+                  textColor="text-black"
+                  onClick={() => setIsEditing(false)}
+                >
+                  Save
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  color="bg-white"
+                  textColor="text-black"
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit Profile
+                </Button>
+              )}
             </div>
           </div>
           {profileForm.map((profile, index) => (
@@ -89,6 +104,7 @@ function UserProfilePage() {
               type={profile.type}
               label={profile.label}
               name={profile.name}
+              disabled={!isEditing}
               error={errors}
               register={register}
             />

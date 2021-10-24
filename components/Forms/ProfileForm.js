@@ -10,7 +10,7 @@ function ProfileForm(props) {
         name={name}
         disabled={disabled}
         placeholder="Placeholder"
-        className="font-nunito text-paragraph-heading w-full bg-transparent truncate font-bold text-black focus:outline-none"
+        className="font-nunito text-paragraph-heading w-full bg-transparent truncate border-b-2 border-black disabled:border-none font-bold text-black focus:outline-none"
         { ...register(name, { ...required }) }
       />
       </div>

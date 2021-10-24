@@ -1,9 +1,11 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ProfileAPI from "api/ProfileAPI";
 import useAPI from "hooks/useAPI";
 
 function useProfile() {
   const [state, dispatch] = useAPI();
+  const [editState, dispatchEdit] = useAPI();
+  // const [isEditing, setIsEditing] = useState(false);
 
   const getProfile = useCallback(() => {
     dispatch({ type: "REQUEST" });
@@ -17,6 +19,19 @@ function useProfile() {
       });
   }, [dispatch]);
 
+  const editProfile = (data) => {
+    console.log(data)
+    dispatchEdit({ type: "REQUEST" });
+    ProfileAPI.editUserProfile(data)
+    .then((res) => {
+      dispatchEdit({ type: "FETCH_SUCCESS", payload: res.data });
+      console.log(res)
+    })
+    .catch(() => {
+      dispatchEdit({ type: "FETCH_FAILED" });
+    });
+  }
+
   useEffect(() => {
     getProfile()
 
@@ -25,7 +40,7 @@ function useProfile() {
     }
   }, [getProfile, dispatch])
 
-  return { state, getProfile };
+  return { state, editState, getProfile, editProfile };
 }
 
 export default useProfile;

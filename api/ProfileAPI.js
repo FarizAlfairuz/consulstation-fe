@@ -5,6 +5,11 @@ const ProfileAPI = {
   getUserProfile() {
     return API.get("/user/profile");
   },
+
+  editUserProfile(data) {
+    return API.post("/user/profile/update", data);
+  },
+
   getConsultantProfile() {
     return API.get("/consultant/profile");
   },

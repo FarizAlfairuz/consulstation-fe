@@ -1,24 +1,21 @@
 import Button from "components/Button";
 import Cookie from "js-cookie";
 import Link from "next/link";
+import { useLogout } from "hooks/user/useAuth";
 
 function LogStatus() {
   let logged;
   if (typeof window !== undefined) {
     logged = Cookie.get("logged");
   }
+  const { logout } = useLogout()
+
   return logged ? (
-    <div>
+    <div className="flex">  
       <Link href="/profile/user">
-        <a className="font-bold">Hi, </a>
+        <a className="font-bold">Hi, profile</a>
       </Link>
-      <Button onClick={
-        () => {
-          Cookie.remove("token")
-          Cookie.remove("refreshToken")
-          Cookie.remove("logged")
-        }
-      }>Logout</Button>
+      <Button onClick={logout} >Logout</Button>
     </div>
   ) : (
     <div className="flex w-2/6 justify-end items-center space-x-2">
