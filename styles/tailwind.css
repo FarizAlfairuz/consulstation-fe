@@ -36,7 +36,7 @@ h6 {
 }
 
 .text-paragraph-1 {
-  @apply text-sm sm:text-base lg:text-lg 2xl:text-xl font-medium;
+  @apply text-sm sm:text-base lg:text-lg 2xl:text-xl;
 }
 
 .text-paragraph-2 {

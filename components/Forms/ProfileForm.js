@@ -5,14 +5,14 @@ function ProfileForm(props) {
     <div id={id} className="space-y-2">
       <p className="font-nunito text-base">{label}</p>
       <div className=" w-3/4">
-      <input
-        type={type}
-        name={name}
-        disabled={disabled}
-        placeholder="Placeholder"
-        className="font-nunito text-paragraph-heading w-full bg-transparent truncate border-b-2 border-black disabled:border-none font-bold text-black focus:outline-none"
-        { ...register(name, { ...required }) }
-      />
+        <input
+          type={type}
+          name={name}
+          disabled={disabled}
+          placeholder={label}
+          className="font-nunito text-paragraph-heading w-full bg-transparent truncate border-b-2 border-black disabled:border-none font-bold text-black focus:outline-none"
+          {...register(name, { ...required })}
+        />
       </div>
       <div className="h-1 px-1">
         {error[name] && (

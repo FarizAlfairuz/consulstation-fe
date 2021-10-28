@@ -6,17 +6,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "components/Button";
 import useProfile from "hooks/user/useProfile";
+import withAuth from "HOC/withAuth";
+import Link from "next/link";
+// import { HashLoader } from "react-spinners";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   username: yup.string().required(),
   firstName: yup.string().required(),
   lastName: yup.string().required(),
+  phone: yup.string().required(),
 });
 
 const profileForm = [
   { type: "text", label: "Username", name: "username" },
   { type: "email", label: "Email", name: "email" },
+  { type: "tel", label: "Phone Number", name: "phone" },
 ];
 
 function UserProfilePage() {
@@ -41,19 +46,27 @@ function UserProfilePage() {
     <Layout width="w-3/5">
       <h1 className="text-heading-2 font-poppins font-extrabold">My Account</h1>
       <div className="flex flex-col justify-center items-center space-y-6 mt-4">
-        <div className="w-36 h-36 md:w-48 md:h-48 2xl:w-56 2xl:h-56 rounded-full bg-gray-100 overflow-hidden flex justify-center items-center">
+        <div className="w-36 h-36 rounded-full bg-gray-100 overflow-hidden flex justify-center items-center">
           <img
             className="object-center object-cover h-full w-full"
             src="https://upload.wikimedia.org/wikipedia/commons/8/85/John_Lennon_1969_%28cropped%29.jpg"
             alt="profile"
           />
         </div>
-        <div className="text-center space-y-2">
-          <h4 className="text-heading-3 font-bold">John Die</h4>
-          <h5 className="text-paragraph-heading ">Personal Account</h5>
-        </div>
+
+        {state.loading ? (
+            <div className="animate-pulse w-full flex flex-col justify-center items-center space-y-2">
+              <div className="h-6 bg-gray-300 w-1/4 rounded"></div>
+              <div className="h-6 bg-gray-300 w-1/5 rounded"></div>
+            </div>
+        ) : state.data.data && (
+          <div className="text-center space-y-2">
+            <h4 className="text-heading-3 font-bold">{state.data.data.firstName + " " + state.data.data.lastName}</h4>
+            <h5 className="text-paragraph-heading ">Personal Account</h5>
+          </div>
+        )}
       </div>
-      <div className="space-y-5 mt-10">
+      <div className="space-y-5">
         <form
           className="bg-gray-300 p-6 rounded-lg"
           onSubmit={handleSubmit(editProfile)}
@@ -121,7 +134,7 @@ function UserProfilePage() {
             </div>
           </div>
         </form>
-        <div className="flex justify-between items-center bg-gray-300 p-6 rounded-lg mt-2">
+        <div className="flex justify-between items-center bg-gray-300 p-6 rounded-lg">
           <div className="space-y-1">
             <p className="font-nunito text-base">Profile Picture</p>
             <p className="font-nunito text-base font-bold">
@@ -134,7 +147,7 @@ function UserProfilePage() {
             </Button>
           </div>
         </div>
-        <div className="flex justify-between items-center bg-gray-300 p-6 rounded-lg mt-2">
+        <div className="flex justify-between items-center bg-gray-300 p-6 rounded-lg">
           <div className="space-y-1">
             <p className="font-nunito text-base">Become a consultant</p>
             <p className="font-nunito text-base font-bold">
@@ -143,7 +156,9 @@ function UserProfilePage() {
           </div>
           <div>
             <Button color="bg-white" textColor="text-black">
-              Register
+              <Link href="/contract/registration">
+                <a>Register</a>
+              </Link>
             </Button>
           </div>
         </div>
@@ -152,4 +167,4 @@ function UserProfilePage() {
   );
 }
 
-export default UserProfilePage;
+export default withAuth(UserProfilePage);

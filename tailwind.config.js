@@ -7,6 +7,14 @@ module.exports = {
       fontFamily: {
         'nunito': ['Nunito Sans', 'sans-serif'],
         'poppins': ['Poppins', 'sans-serif']
+      },
+      minHeight: {
+        'half-screen': '50vh',
+        '75-screen': '75vh'
+      },
+      maxHeight: {
+        'half-screen': '50vh',
+        '75-screen': '75vh'
       }
     },
   },

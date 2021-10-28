@@ -47,7 +47,7 @@ function RegisterPage() {
         <div className="flex flex-col w-1/2 items-start ">
           <form className="flex flex-col w-5/6 space-y-6 " onSubmit={handleSubmit(registerSubmit)}>
 
-            <div className="space-x-6 flex flex-row w-full">
+            <div className="space-x-6 flex">
               <AuthForm type="text" placeholder="First Name" name="firstName" error={errors} register={register} />
               <AuthForm type="text" placeholder="Last Name" name="lastName" error={errors} register={register} />
             </div>

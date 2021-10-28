@@ -32,7 +32,7 @@ function useLogin() {
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
         Cookie.set("logged", true);
-        router.push("/");
+        router.replace("/");
       })
       .catch(() => {
         dispatch({ type: "FETCH_FAILED" });

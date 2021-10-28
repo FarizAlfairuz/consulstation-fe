@@ -2,7 +2,8 @@ import axios from "axios";
 import Cookie from "js-cookie"
 
 const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
-const token = Cookie.get("token")
+// console.log("blac")
+let token = Cookie.get("token")
 const refreshToken = Cookie.get("refreshToken");
 
 const API = axios.create({
@@ -25,10 +26,24 @@ API.interceptors.response.use(response => response, error => {
 
       return Promise.reject()
   }
+  if (error.response  && error.response.status === 403) {
+      console.log("forbidden")
+      token = Cookie.get("token")
+
+      return Promise.reject()
+  }
 
 
 
   return Promise.reject(error)
+})
+
+API.interceptors.request.use(req => {
+  // token = Cookie.get("token")
+  // console.log(token)
+  // console.log(`${req.method} ${req.url}`);
+
+  return req
 })
 
 export default API;

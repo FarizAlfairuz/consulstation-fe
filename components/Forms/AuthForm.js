@@ -1,7 +1,7 @@
 function AuthForm(props) {
   const { id, name, type, placeholder, error, register, required, disabled, width } = props;
   return (
-    <div id={id}>
+    <div id={id} className="w-full">
       <input
         type={type}
         name={name}

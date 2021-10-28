@@ -1,8 +1,9 @@
 import API from "./API";
-// import TokenAPI from "./TokenAPI"
+import TokenAPI from "./TokenAPI"
 
 const ProfileAPI = {
   getUserProfile() {
+
     return API.get("/user/profile");
   },
 
