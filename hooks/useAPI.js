@@ -14,7 +14,7 @@ const reducer = (state, action) => {
         loading: false,
         error: "",
         data: action.payload,
-        disabled: true
+        disabled: false
       };
     case "FETCH_FAILED":
       return {

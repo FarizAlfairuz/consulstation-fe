@@ -1,7 +1,10 @@
 import partnershipAPI from "api/PartnershipAPI";
 import useAPI from "hooks/useAPI";
+import { useRouter } from "next/router";
+
 function usePartnership() {
   const [state, dispatch] = useAPI();
+  const router = useRouter()
   const partnershipRequest = (data) => {
     console.log(data);
     const file = data.cv[0];
@@ -15,7 +18,8 @@ function usePartnership() {
       .request(reqData)
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
-        console.log(res);
+        // console.log(res);
+        router.replace("/")
       })
       .catch(() => {
         dispatch({ type: "FETCH_FAILED" });

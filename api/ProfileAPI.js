@@ -10,6 +10,9 @@ const ProfileAPI = {
   editUserProfile(data) {
     return API.post("/user/profile/update", data);
   },
+  uploadPhotoProfile(data) {
+    return API.post("/user/avatar", data);
+  },
 
   getConsultantProfile() {
     return API.get("/consultant/profile");

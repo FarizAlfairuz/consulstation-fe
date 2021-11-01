@@ -1,13 +1,14 @@
-function ChatListCard() {
+function ChatListCard(props) {
+  const { name, picture } = props
   return (
     <div className="flex items-center space-x-3 bg-gray-300 rounded-lg p-5">
       <img
         className="h-14 w-14 rounded-full"
-        src="https://media.istockphoto.com/vectors/search-magnifying-glass-icon-symbol-vector-id1221635138"
-        alt="magnifying"
+        src={picture}
+        alt="Consultant"
       />
       <div>
-        <h6 className="text-paragraph-1 font-bold">John Doe</h6>
+        <h6 className="text-paragraph-1 font-bold">{name}</h6>
         <h6 className="text-paragraph-1">Available</h6>
       </div>
     </div>

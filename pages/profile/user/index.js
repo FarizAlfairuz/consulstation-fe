@@ -8,7 +8,8 @@ import Button from "components/Button";
 import useProfile from "hooks/user/useProfile";
 import withAuth from "HOC/withAuth";
 import Link from "next/link";
-// import { HashLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
+import PhotoForm from "components/Forms/PhotoForm";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -16,6 +17,23 @@ const schema = yup.object().shape({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
   phone: yup.string().required(),
+  // profilePicture: yup
+  //   .mixed()
+  //   .required()
+  //   .test({
+  //     message: "No file selected",
+  //     test: (arr) => arr.length > 0,
+  //   })
+  //   .test(
+  //     "fileFormat",
+  //     "Invalid format",
+  //     (value) => value[0] && SUPPORTED_FORMATS.includes(value[0].type)
+  //   )
+  //   .test(
+  //     "fileSize",
+  //     "Size too big. Max 2MB",
+  //     (value) => value[0] && value[0].size <= FILE_SIZE
+  //   ),
 });
 
 const profileForm = [
@@ -27,16 +45,22 @@ const profileForm = [
 function UserProfilePage() {
   const { state, editProfile } = useProfile();
   const [isEditing, setIsEditing] = useState(false);
+  const [upload, setUpload] = useState(null)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onTouched",
   });
+
+  // const upload = watch("pp");
+  // const photo = URL.createObjectURL(upload[0])
+  // console.log(upload)
 
   useEffect(() => {
     reset(state.data.data);
@@ -47,96 +71,99 @@ function UserProfilePage() {
       <h1 className="text-heading-2 font-poppins font-extrabold">My Account</h1>
       <div className="flex flex-col justify-center items-center space-y-6 mt-4">
         <div className="w-36 h-36 rounded-full bg-gray-100 overflow-hidden flex justify-center items-center">
-          <img
-            className="object-center object-cover h-full w-full"
-            src="https://upload.wikimedia.org/wikipedia/commons/8/85/John_Lennon_1969_%28cropped%29.jpg"
-            alt="profile"
-          />
+          {state.loading ? (
+            <MoonLoader size={60} color="gray" />
+          ) : (
+            state.data.data && (
+              <img
+                className="object-center object-cover h-full w-full"
+                src={
+                  upload && upload.length > 0
+                    ? URL.createObjectURL(upload[0])
+                    : state.data.data.profilePicture
+                }
+                alt={state.data.data.firstName + " " + state.data.data.lastName}
+              />
+            )
+          )}
         </div>
 
         {state.loading ? (
-            <div className="animate-pulse w-full flex flex-col justify-center items-center space-y-2">
-              <div className="h-6 bg-gray-300 w-1/4 rounded"></div>
-              <div className="h-6 bg-gray-300 w-1/5 rounded"></div>
-            </div>
-        ) : state.data.data && (
-          <div className="text-center space-y-2">
-            <h4 className="text-heading-3 font-bold">{state.data.data.firstName + " " + state.data.data.lastName}</h4>
-            <h5 className="text-paragraph-heading ">Personal Account</h5>
+          <div className="animate-pulse w-full flex flex-col justify-center items-center space-y-2">
+            <div className="h-6 bg-gray-300 w-1/4 rounded"></div>
+            <div className="h-6 bg-gray-300 w-1/5 rounded"></div>
           </div>
+        ) : (
+          state.data.data && (
+            <div className="text-center space-y-2">
+              <h4 className="text-heading-3 font-bold">
+                {state.data.data.firstName + " " + state.data.data.lastName}
+              </h4>
+              <h5 className="text-paragraph-heading ">Personal Account</h5>
+            </div>
+          )
         )}
       </div>
       <div className="space-y-5">
-        <form
-          className="bg-gray-300 p-6 rounded-lg"
-          onSubmit={handleSubmit(editProfile)}
-        >
-          <div className="flex justify-between items-center space-x-3 ">
-            <div className="flex space-x-3 ">
+        <div className="bg-gray-300 p-6 rounded-lg">
+          <form onSubmit={handleSubmit(editProfile)}>
+            <div className="flex justify-between items-center space-x-3 ">
+              <div className="flex space-x-3 ">
+                <ProfileForm
+                  type="text"
+                  label="First Name"
+                  name="firstName"
+                  disabled={!isEditing}
+                  error={errors}
+                  register={register}
+                />
+                <ProfileForm
+                  type="text"
+                  label="Last Name"
+                  name="lastName"
+                  disabled={!isEditing}
+                  error={errors}
+                  register={register}
+                />
+              </div>
+              <div>
+                {isEditing ? (
+                  <Button
+                    color="bg-white"
+                    textColor="text-black"
+                    onClick={() => setIsEditing(false)}
+                  >
+                    Save
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    color="bg-white"
+                    textColor="text-black"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    Edit Profile
+                  </Button>
+                )}
+              </div>
+            </div>
+            {profileForm.map((profile, index) => (
               <ProfileForm
-                type="text"
-                label="First Name"
-                name="firstName"
+                key={index}
+                type={profile.type}
+                label={profile.label}
+                name={profile.name}
                 disabled={!isEditing}
                 error={errors}
                 register={register}
               />
-              <ProfileForm
-                type="text"
-                label="Last Name"
-                name="lastName"
-                disabled={!isEditing}
-                error={errors}
-                register={register}
-              />
-            </div>
-            <div>
-              {isEditing ? (
-                <Button
-                  color="bg-white"
-                  textColor="text-black"
-                  onClick={() => setIsEditing(false)}
-                >
-                  Save
-                </Button>
-              ) : (
-                <Button
-                  type="submit"
-                  color="bg-white"
-                  textColor="text-black"
-                  onClick={() => setIsEditing(true)}
-                >
-                  Edit Profile
-                </Button>
-              )}
-            </div>
-          </div>
-          {profileForm.map((profile, index) => (
-            <ProfileForm
-              key={index}
-              type={profile.type}
-              label={profile.label}
-              name={profile.name}
-              disabled={!isEditing}
-              error={errors}
-              register={register}
-            />
-          ))}
-          <div className="space-y-2">
-            <p className="font-nunito text-base">Profile Picture</p>
-            <div className="flex space-x-2">
-              <Button color="bg-white" textColor="text-black">
-                Change Picture
-              </Button>
-              <Button color="bg-white" textColor="text-black">
-                Delete Picture
-              </Button>
-            </div>
-          </div>
-        </form>
+            ))}
+          </form>
+          <PhotoForm setUpload={setUpload} />
+        </div>
         <div className="flex justify-between items-center bg-gray-300 p-6 rounded-lg">
           <div className="space-y-1">
-            <p className="font-nunito text-base">Profile Picture</p>
+            <p className="font-nunito text-base">Change Password</p>
             <p className="font-nunito text-base font-bold">
               Changing your password will make you have to logging again
             </p>

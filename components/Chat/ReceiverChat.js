@@ -8,7 +8,7 @@ function ReceiverChat() {
       />
       <div className="space-y-1">
         <div className="bg-gray-300 p-3 rounded-md text-base font-nunito">
-          Hey retard
+          Hello
         </div>
         <p className="text-sm font-nunito text-left">Read</p>
       </div>

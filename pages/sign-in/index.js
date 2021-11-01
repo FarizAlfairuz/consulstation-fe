@@ -6,6 +6,7 @@ import { useLogin } from "hooks/user/useAuth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import withOutAuth from "HOC/withOutAuth";
 
 const schema = yup.object().shape({
   username: yup.string().required(),
@@ -71,4 +72,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default withOutAuth(LoginPage);

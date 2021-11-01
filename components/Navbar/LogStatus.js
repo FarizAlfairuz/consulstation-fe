@@ -1,6 +1,7 @@
 import Button from "components/Button";
 import Cookie from "js-cookie";
 import Link from "next/link";
+import usePersistentState from "hooks/usePersistentState";
 import { useLogout } from "hooks/user/useAuth";
 
 function LogStatus() {
@@ -8,14 +9,17 @@ function LogStatus() {
   if (typeof window !== undefined) {
     logged = Cookie.get("logged");
   }
-  const { logout } = useLogout()
+  const [username] = usePersistentState("username", null);
+  const { logout } = useLogout();
 
   return logged ? (
-    <div className="flex">  
+    <div className="flex w-2/6 justify-end space-x-6 items-center">
       <Link href="/profile/user">
-        <a className="font-bold">Hi, profile</a>
+        <a className="font-bold">Hi, {username !== null && username}</a>
       </Link>
-      <Button onClick={logout} >Logout</Button>
+      <div>
+        <Button onClick={logout}>Logout</Button>
+      </div>
     </div>
   ) : (
     <div className="flex w-2/6 justify-end items-center space-x-2">

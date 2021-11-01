@@ -1,6 +1,7 @@
 import AuthAPI from "api/AuthAPI";
 import useAPI from "hooks/useAPI";
 import Cookie from "js-cookie";
+import usePersistentState from "hooks/usePersistentState";
 import { useRouter } from "next/dist/client/router";
 
 function useRegister() {
@@ -24,6 +25,7 @@ function useRegister() {
 function useLogin() {
   const router = useRouter();
   const [state, dispatch] = useAPI();
+  const [username, setUsername] = usePersistentState('username', null)
 
   const loginSubmit = (data) => {
     // console.log(data)
@@ -32,6 +34,9 @@ function useLogin() {
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
         Cookie.set("logged", true);
+        Cookie.set("role", res.data.data.role);
+        // console.log(res)
+        setUsername(data.username)
         router.replace("/");
       })
       .catch(() => {
@@ -39,7 +44,7 @@ function useLogin() {
       });
   };
 
-  return { state, dispatch, loginSubmit };
+  return { state, dispatch, loginSubmit, username };
 }
 
 function useLogout() {

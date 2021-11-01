@@ -14,9 +14,11 @@ const SUPPORTED_FORMATS = ["application/pdf"];
 const schema = yup.object().shape({
   npwp: yup.string().required(),
   startingYear: yup.string().required(),
-  phone: yup.string().required(),
-  cv: yup.mixed().required()
-  .test({
+  // phone: yup.string().required(),
+  cv: yup
+    .mixed()
+    .required()
+    .test({
       message: "No file selected",
       test: (arr) => arr.length > 0,
     })
@@ -37,15 +39,15 @@ function ContractRegristrationPage() {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onTouched",
   });
-  const upload = watch("cv")
+  const upload = watch("cv");
 
-  const { state, partnershipRequest } = usePartnership()
-  // console.log(upload)
+  const { state, partnershipRequest } = usePartnership();
+  console.log(upload);
 
   return (
     <Layout>
@@ -55,13 +57,30 @@ function ContractRegristrationPage() {
         duis consequat etiam ornare pulvinar.
       </h4>
 
-      <form onSubmit={handleSubmit(partnershipRequest)} className="bg-gray-200 p-8 rounded-lg space-y-6">
+      <form
+        onSubmit={handleSubmit(partnershipRequest)}
+        className="bg-gray-200 p-8 rounded-lg space-y-6"
+      >
         <div className="flex space-x-4">
-          <ContractForm type="number" name="npwp" width="w-full" label="NPWP"  error={errors} register={register} />
-          <ContractForm type="number" name="startingYear" width="w-full" label="Starting Year"  error={errors} register={register} />
+          <ContractForm
+            type="number"
+            name="npwp"
+            width="w-full"
+            label="NPWP"
+            error={errors}
+            register={register}
+          />
+          <ContractForm
+            type="number"
+            name="startingYear"
+            width="w-full"
+            label="Starting Year"
+            error={errors}
+            register={register}
+          />
         </div>
         {/* <ContractForm width="w-1/2" label="Email" /> */}
-        <ContractForm  type="text" name="phone" width="w-1/2" label="Phone Number" error={errors} register={register} />
+        {/* <ContractForm  type="text" name="phone" width="w-1/2" label="Phone Number" error={errors} register={register} /> */}
         <div className="space-y-2">
           <p className="text-paragraph-1 text-black text-opacity-60 font-nunito font-bold">
             CV
@@ -80,14 +99,12 @@ function ContractRegristrationPage() {
             name="cv"
             {...register("cv", { required: true })}
           />
-          {upload && (
-            <div>{upload[0].name}</div>
-          )}
+          {upload && <div>{upload[0].name}</div>}
           {errors["cv"] && (
-          <p className="text-xs text-red-600 break-words">
-            {errors["cv"].message}
-          </p>
-        )}
+            <p className="text-xs text-red-600 break-words">
+              {errors["cv"].message}
+            </p>
+          )}
         </div>
 
         {/* Experience */}
