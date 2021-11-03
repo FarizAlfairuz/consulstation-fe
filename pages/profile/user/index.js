@@ -60,7 +60,7 @@ function UserProfilePage() {
 
   // const upload = watch("pp");
   // const photo = URL.createObjectURL(upload[0])
-  // console.log(upload)
+  // console.log(state.data.data)
 
   useEffect(() => {
     reset(state.data.data);
@@ -80,7 +80,7 @@ function UserProfilePage() {
                 src={
                   upload && upload.length > 0
                     ? URL.createObjectURL(upload[0])
-                    : state.data.data.profilePicture
+                    : state.data.data.profilePicture.url
                 }
                 alt={state.data.data.firstName + " " + state.data.data.lastName}
               />
