@@ -1,16 +1,16 @@
 import API from "./API";
 
 const ChatAPI = {
-  initiate(data) {
-    return API.post("/chat/initiate", data);
+  initiate(consultantId) {
+    return API.post("/chat/initiate", { consultantId });
   },
 
-  sendChat(data, id) {
+  sendChat(id, data) {
     return API.post(`/chat/${id}/message`, data);
   },
 
-  getRoomId(id) {
-    return API.get(`/chat/${id}`);
+  getChats(id, page, limit) {
+    return API.get(`/chat/${id}?page=${page}&limit=${limit}`);
   }
 };
 

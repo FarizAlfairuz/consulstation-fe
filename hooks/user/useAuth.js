@@ -60,6 +60,7 @@ function useLogout() {
         Cookie.remove("token");
         Cookie.remove("refreshToken");
         Cookie.remove("logged");
+        Cookie.remove("role");
         router.push("/")
       })
       .catch(() => {

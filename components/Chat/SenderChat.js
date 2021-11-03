@@ -1,9 +1,11 @@
-function SenderChat() {
+function SenderChat(props) {
+  const { chat } = props
+  console.log(chat)
   return (
     <div className="flex justify-end items-baseline space-x-3">
       <div className="space-y-1">
         <div className="bg-gray-300 p-3 rounded-md text-base font-nunito">
-          Hey
+          {chat.message}
         </div>
         <p className="text-sm font-nunito text-right">Read</p>
       </div>

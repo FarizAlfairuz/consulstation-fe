@@ -32,12 +32,12 @@ function ConsultantsPage() {
           state.data.data.map((consultant, index) => (
             <ConsultantCard key={index} id={index} username={consultant.username} clicked={clicked} setClicked={setClicked} />
           ))}
-          <ConsultantCard id="4" username="joe mama1" clicked={clicked} setClicked={setClicked} />
+          {/* <ConsultantCard id="4" username="joe mama1" clicked={clicked} setClicked={setClicked} />
           <ConsultantCard id="5" username="joe mama2" clicked={clicked} setClicked={setClicked} />
           <ConsultantCard id="6" username="joe mama3" clicked={clicked} setClicked={setClicked} />
           <ConsultantCard id="7" username="joe mama4" clicked={clicked} setClicked={setClicked} />
           <ConsultantCard id="8" username="joe mama5" clicked={clicked} setClicked={setClicked} />
-          <ConsultantCard id="9" username="joe mama6" clicked={clicked} setClicked={setClicked} />
+          <ConsultantCard id="9" username="joe mama6" clicked={clicked} setClicked={setClicked} /> */}
       </div>
     </Layout>
   );

@@ -1,13 +1,18 @@
-import { PaperAirplaneIcon } from "@heroicons/react/outline";
+import dynamic from "next/dynamic";
 import { ActiveChatCard, ChatListCard } from "components/Cards/ChatCard";
-import ReceiverChat from "components/Chat/ReceiverChat";
-import SenderChat from "components/Chat/SenderChat";
 import Layout from "components/Layout";
 import useConsultant from "hooks/useConsultant";
+import useUserChat from "hooks/user/useUserChat";
 
 function ChatPage() {
   const { state } = useConsultant();
-  console.log(state.data.data);
+  // console.log(state.data.data);
+  const ChatRoom = dynamic(() => import("components/Chat/ChatRoom"));
+
+
+  const { initiateChat, selectedChat } = useUserChat();
+  // console.log(selectedChat);
+
   return (
     <Layout>
       <h1 className="font-poppins text-4xl font-bold">Chat</h1>
@@ -21,33 +26,30 @@ function ChatPage() {
           <ActiveChatCard /> */}
           <h6 className="text-paragraph-1 font-bold mb-4">Other Consultant</h6>
           <div className="flex flex-col space-y-4">
-            {state.data.data && state.data.data.map((cons, index) => (
-              <ChatListCard key={index} name={cons.username} picture={cons.profilePicture.url} />
-            ))}
+            {state.data.data &&
+              state.data.data.map((cons, index) => (
+                <ChatListCard
+                  key={index}
+                  consultantId={cons._id}
+                  name={cons.username}
+                  picture={cons.profilePicture.url}
+                  onClick={() => initiateChat(cons._id)}
+                />
+              ))}
           </div>
         </div>
-        <div className="col-span-2 bg-gray-300 rounded-tr-lg rounded-br-lg p-6">
-          <div className="relative  bg-white rounded-tr-lg rounded-br-lg">
-            <div className="bg-white rounded-tr-lg  h-full max-h-75-screen overflow-scroll  p-6 space-y-3 flex flex-col justify-between scrollbar-thin scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700 scrollbar-track-transparent hover:scrollbar-track-gray-200 overflow-y-scroll scrollbar-thumb-rounded-full">
-              <SenderChat />
-              <SenderChat />
 
-              <ReceiverChat />
-              <ReceiverChat />
-              <SenderChat />
-              <SenderChat />
+        {/* Chat Room */}
+
+        <div className="col-span-2 bg-gray-300 rounded-tr-lg rounded-br-lg p-6">
+          {selectedChat !== undefined ? (
+            <ChatRoom />
+          ) : (
+            <div className="relative h-full flex justify-center items-center bg-white rounded-tr-lg rounded-br-lg">
+              Click on consultant to start a chat
             </div>
-            <div className="flex p-3">
-              <input
-                className="bg-gray-200 py-5 px-6 rounded-l-full w-full focus:outline-none"
-                placeholder="Enter"
-              />
-              <div className="bg-gray-300 rounded-r-full py-3 px-6 flex justify-center items-center">
-                <PaperAirplaneIcon className="w-9 h-9 text-white rotate-90" />
-              </div>
-            </div>
-          </div>
-        </div>
+          )}
+        </div >
       </div>
     </Layout>
   );
