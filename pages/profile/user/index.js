@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "components/Button";
 import useProfile from "hooks/user/useProfile";
-import withAuth from "HOC/withAuth";
+import withAuth from "HOC/user/withAuth";
 import Link from "next/link";
 import { MoonLoader } from "react-spinners";
 import PhotoForm from "components/Forms/PhotoForm";

@@ -6,12 +6,16 @@ const AuthAPI = {
   },
 
   login(data) {
-    return API.post("/login", data)
+    return API.post("/login", data);
   },
 
   logout(data) {
-    return API.post("/logout", data)
-  }
+    return API.post("/logout", data);
+  },
+
+  loginAdmin(data) {
+    return API.post("/login/admin", data);
+  },
 };
 
 export default AuthAPI;

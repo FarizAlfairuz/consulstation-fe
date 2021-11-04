@@ -2,7 +2,7 @@ import Cookie from "js-cookie";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-const withOutAuth = (WrappedComponent) => {
+const withoutAuth = (WrappedComponent) => {
   return (props) => {
     const router = useRouter();
     const [notLogged, setNotLogged] = useState(false);
@@ -25,4 +25,4 @@ const withOutAuth = (WrappedComponent) => {
   };
 };
 
-export default withOutAuth;
+export default withoutAuth;

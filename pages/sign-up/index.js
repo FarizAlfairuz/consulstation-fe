@@ -5,7 +5,7 @@ import { useRegister } from "hooks/user/useAuth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import withOutAuth from "HOC/withOutAuth";
+import withoutAuth from "HOC/user/withoutAuth";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -72,4 +72,4 @@ function RegisterPage() {
   );
 }
 
-export default withOutAuth(RegisterPage);
+export default withoutAuth(RegisterPage);

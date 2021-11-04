@@ -1,7 +1,7 @@
 import ContractForm from "components/Forms/ContractForm";
 import Layout from "components/Layout";
 import Button from "components/Button";
-import withAuth from "HOC/withAuth";
+import withAuth from "HOC/user/withAuth";
 import { PlusIcon } from "@heroicons/react/solid";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
