@@ -1,3 +1,4 @@
+import ConsultantAPI from "api/ConsultantAPI";
 import Button from "components/Button";
 import Layout from "components/Layout";
 import useConsultant from "hooks/consultant/useConsultant";
@@ -5,23 +6,57 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { HashLoader } from "react-spinners";
 
-function ConsProfilePage() {
-  const router = useRouter()
+export const getStaticPaths = async () => {
+  const cons = await ConsultantAPI.getConsultants().then(
+    (res) => res.data.data
+  );
 
-  const { id } = router.query
+  const paths = cons.map((c) => {
+    return {
+      params: { id: c._id },
+    };
+  });
 
-  const { profile, getPublicProfile } = useConsultant()
-  useEffect(() => {
-    getPublicProfile(id)
-  }, [id])
+  return {
+    paths: paths,
+    fallback: false,
+  };
+};
 
+export const getStaticProps = async (context) => {
+  const id = context.params.id;
+
+  const response = await ConsultantAPI.getPublicProfile(id).then(
+    (res) => res.data.data
+  );
+
+  return {
+    props: {
+      profile: response,
+    },
+  };
+};
+
+function ConsPublicProfilePage(props) {
+  const { profile } = props
   console.log(profile)
+  // const router = useRouter()
 
-  return profile.loading ? (
-    <div className="h-screen w-screen flex justify-center items-center">
-      <HashLoader size={60} color="gray" /> 
-    </div>
-  ) : (
+  // const { id } = router.pathname
+
+  // const { profile, getPublicProfile } = useConsultant()
+  // useEffect(() => {
+  //   getPublicProfile(id)
+  // }, [id])
+
+  // console.log(profile)
+
+  // profile.loading ? (
+  //   <div className="h-screen w-screen flex justify-center items-center">
+  //     <HashLoader size={60} color="gray" />
+  //   </div>
+  // ) :
+  return (
     <Layout>
       <div className="max-w-3xl flex flex-col space-y-4">
         <h1 className="font-poppins text-4xl font-bold">Our Consultant</h1>
@@ -42,7 +77,7 @@ function ConsProfilePage() {
               />
             </div>
             <div className="flex flex-col justify-between py-2">
-              {/* <h4 className="text-heading-3 font-bold">{profile.data.data.firstName + " " + profile.data.data.lastName}</h4> */}
+              <h4 className="text-heading-3 font-bold">{profile.firstName + " " + profile.lastName}</h4>
               <h5 className="text-paragraph-heading ">Personal Account</h5>
               <h5 className="text-paragraph-heading ">5 years</h5>
             </div>
@@ -117,4 +152,4 @@ function ConsProfilePage() {
   );
 }
 
-export default ConsProfilePage;
+export default ConsPublicProfilePage;

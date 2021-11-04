@@ -10,6 +10,7 @@ import withAuth from "HOC/withAuth";
 import Link from "next/link";
 import { MoonLoader } from "react-spinners";
 import PhotoForm from "components/Forms/PhotoForm";
+import Cookie from "js-cookie"
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -17,23 +18,6 @@ const schema = yup.object().shape({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
   phone: yup.string().required(),
-  // profilePicture: yup
-  //   .mixed()
-  //   .required()
-  //   .test({
-  //     message: "No file selected",
-  //     test: (arr) => arr.length > 0,
-  //   })
-  //   .test(
-  //     "fileFormat",
-  //     "Invalid format",
-  //     (value) => value[0] && SUPPORTED_FORMATS.includes(value[0].type)
-  //   )
-  //   .test(
-  //     "fileSize",
-  //     "Size too big. Max 2MB",
-  //     (value) => value[0] && value[0].size <= FILE_SIZE
-  //   ),
 });
 
 const profileForm = [
@@ -42,8 +26,11 @@ const profileForm = [
   { type: "tel", label: "Phone Number", name: "phone" },
 ];
 
+
 function UserProfilePage() {
-  const { state, editProfile } = useProfile();
+  const role = Cookie.get("role")
+  // console.log(role)
+  const { state, editProfile } = useProfile(role);
   const [isEditing, setIsEditing] = useState(false);
   const [upload, setUpload] = useState(null)
 

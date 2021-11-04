@@ -30,7 +30,7 @@ import { useEffect, useState } from "react";
 
 function PhotoForm(props) {
   const { setUpload } = props;
-  const [isEditing, setIsEditing] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
 
   const {
     register,
@@ -42,7 +42,7 @@ function PhotoForm(props) {
     mode: "onTouched",
   });
 
-  const { photoState, uploadPhoto } = useProfile();
+  const { photoState, uploadPhoto, deletePhoto, deleteState, isEditing, setIsEditing } = useProfile();
   const foto = watch("pp");
 
   useEffect(() => {
@@ -65,7 +65,13 @@ function PhotoForm(props) {
             >
               Change Picture
             </Button>
-            <Button color="bg-white" textColor="text-black">
+            <Button
+              color="bg-white"
+              textColor="text-black"
+              loadingColor="gray"
+              onClick={() => deletePhoto()}
+              disabled={deleteState.disabled}
+            >
               Delete Picture
             </Button>
           </div>
@@ -73,7 +79,8 @@ function PhotoForm(props) {
           <div className="flex space-x-2">
             <Button
               type="submit"
-            //   onClick={() => setIsEditing(false)}
+              //   onClick={() => setIsEditing(false)}
+              loadingColor="gray"
               color="bg-white"
               textColor="text-black"
               disabled={photoState.disabled}

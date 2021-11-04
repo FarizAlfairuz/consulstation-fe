@@ -1,20 +1,23 @@
 import axios from "axios";
-import Cookie from "js-cookie"
+import Cookie from "js-cookie";
 
 const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
 // console.log("blac")
-let token = Cookie.get("token")
+// const token = Cookie.get("token")
+// console.log(Cookie.get("token"))
 const refreshToken = Cookie.get("refreshToken");
 
 const API = axios.create({
   baseURL: baseURL,
-  headers: { 'Authorization': 'Bearer ' + token },
-  withCredentials: true
+  headers: { Authorization: "Bearer " + Cookie.get("token") },
+  withCredentials: true,
 });
 
-API.interceptors.response.use(response => response, error => {
-  if (error.response  && error.response.status === 401) {
-      console.log("unauthorized")
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      console.log("unauthorized");
       // API.post("/token", {refreshToken})
       // .then((res) => {
       //   Cookie.set("refreshToken", res.data.refreshToken)
@@ -24,26 +27,33 @@ API.interceptors.response.use(response => response, error => {
       //   console.log("Something wrong!");
       // });
 
-      return Promise.reject()
+      return Promise.reject();
+    }
+    if (error.response && error.response.status === 403) {
+      console.log("forbidden");
+      // API.post("/token", { refreshToken })
+      //   .then((res) => {
+      //     console.log(res)
+      //     Cookie.set("refreshToken", res.data.refreshToken);
+      //     Cookie.set("token", res.data.accessToken);
+      //   })
+      //   .catch(() => {
+      //     console.log("Something wrong!");
+      //   });
+
+      return Promise.reject();
+    }
+
+    return Promise.reject(error);
   }
-  if (error.response  && error.response.status === 403) {
-      console.log("forbidden")
-      token = Cookie.get("token")
+);
 
-      return Promise.reject()
-  }
-
-
-
-  return Promise.reject(error)
-})
-
-API.interceptors.request.use(req => {
+API.interceptors.request.use((req) => {
   // token = Cookie.get("token")
   // console.log(token)
   // console.log(`${req.method} ${req.url}`);
 
-  return req
-})
+  return req;
+});
 
 export default API;

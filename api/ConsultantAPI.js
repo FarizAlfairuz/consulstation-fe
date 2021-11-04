@@ -5,6 +5,14 @@ const ConsultantAPI = {
   getConsultants() {
     return API.get("/consultants");
   },
+
+  getPublicProfile(id) {
+    return API.get(`/consultant/${id}`)
+  },
+
+  getConsProfile() {
+    return API.get("/consultant/profile")
+  }
 };
 
 export default ConsultantAPI;

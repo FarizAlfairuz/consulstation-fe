@@ -1,17 +1,28 @@
 import dynamic from "next/dynamic";
 import { ActiveChatCard, ChatListCard } from "components/Cards/ChatCard";
 import Layout from "components/Layout";
-import useConsultant from "hooks/useConsultant";
 import useUserChat from "hooks/user/useUserChat";
+import ChatAPI from "api/ChatAPI";
+
+// export const getStaticProps = async () => {
+//   const room = await ChatAPI.getChatroom()
+//     .then((res) => res.json())
+//     .catch((err) => console.log(err));
+
+//   return {
+//     props: {
+//       room: room,
+//     },
+//   };
+// };
 
 function ChatPage() {
-  const { state } = useConsultant();
-  // console.log(state.data.data);
+  // const { room } = props;
+  // console.log(room)
   const ChatRoom = dynamic(() => import("components/Chat/ChatRoom"));
-
-
-  const { initiateChat, selectedChat } = useUserChat();
-  // console.log(selectedChat);
+  
+  const { initiateChat, selectedChat, roomState } = useUserChat();
+  // console.log(roomState.data.data);
 
   return (
     <Layout>
@@ -24,15 +35,14 @@ function ChatPage() {
         <div className="col-span-1 p-6 space-y-4">
           {/* <h6 className="text-paragraph-1 font-bold mb-4">Active Consultant</h6>
           <ActiveChatCard /> */}
-          <h6 className="text-paragraph-1 font-bold mb-4">Other Consultant</h6>
+          <h6 className="text-paragraph-1 font-bold mb-4">Other Consultants</h6>
           <div className="flex flex-col space-y-4">
-            {state.data.data &&
-              state.data.data.map((cons, index) => (
+            {roomState.data.data && roomState.data.data.map((cons, index) => (
                 <ChatListCard
                   key={index}
-                  consultantId={cons._id}
-                  name={cons.username}
-                  picture={cons.profilePicture.url}
+                  consultantId={cons.otherUser._id}
+                  name={cons.otherUser.username}
+                  picture={cons.otherUser.profilePicture.url}
                   onClick={() => initiateChat(cons._id)}
                 />
               ))}
@@ -49,7 +59,7 @@ function ChatPage() {
               Click on consultant to start a chat
             </div>
           )}
-        </div >
+        </div>
       </div>
     </Layout>
   );

@@ -8,14 +8,29 @@ const withAuth = (WrappedComponent) => {
   return (props) => {
     const router = useRouter();
     const [verified, setVerified] = useState(false);
-    useEffect(async () => {
+    useEffect(() => {
       const token = Cookie.get("token");
-    //   const refreshToken = Cookie.get("refreshToken");
+      const refreshToken = Cookie.get("refreshToken");
+      // console.log(refreshToken)
 
       if (!token) {
         setVerified(false);
         router.replace("/");
         // console.log("hehe");
+        // if (refreshToken) {
+        //   API.post("/token", { refreshToken })
+        //     .then((res) => {
+        //       console.log(res);
+        //       Cookie.set("refreshToken", res.data.refreshToken);
+        //       Cookie.set("token", res.data.accessToken);
+        //     })
+        //     .catch(() => {
+        //       console.log("Something wrong!");
+        //     });
+        // } else {
+        //   setVerified(false);
+        //   router.replace("/");
+        // }
       } else {
         // API.interceptors.response.use(
         //   (response) => response,

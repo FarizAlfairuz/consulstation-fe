@@ -11,6 +11,10 @@ const ChatAPI = {
 
   getChats(id, page, limit) {
     return API.get(`/chat/${id}?page=${page}&limit=${limit}`);
+  },
+
+  getChatroom() {
+    return API.get("/chatrooms")
   }
 };
 

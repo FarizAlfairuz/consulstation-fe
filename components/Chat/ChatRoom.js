@@ -2,13 +2,17 @@ import { PaperAirplaneIcon } from "@heroicons/react/solid";
 import SenderChat from "./SenderChat";
 import ReceiverChat from "./ReceiverChat";
 import useUserChat from "hooks/user/useUserChat";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import usePersistentState from "hooks/usePersistentState";
+
 
 function ChatRoom() {
   const { chatState, sendChat } = useUserChat();
+  const [username] = usePersistentState("username", null);
 
-  // console.log(chatState.data.data);
+
+  console.log(chatState.data.data);
 
   const { register, handleSubmit, reset } = useForm({
     mode: "onTouched",
@@ -24,10 +28,10 @@ function ChatRoom() {
         {/* <SenderChat />
         <SenderChat /> */}
         {chatState.data.data && chatState.data.data.map((chat, index) => 
-          chat.flow === "user-to-consultant" ? (
+          chat.sender.username === username ? (
             <SenderChat key={index} chat={chat} />
           ) : (
-            <ReceiverChat key={index} />
+            <ReceiverChat key={index} chat={chat} />
           )
         )}
       </div>
