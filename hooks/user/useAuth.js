@@ -54,7 +54,8 @@ function useLogin(role) {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
           Cookie.set("logged", true);
           Cookie.set("role", res.data.data.role);
-          console.log(res)
+          // console.log(res)
+          router.replace("/admin/dashboard");
         })
         .catch(() => {
           dispatch({ type: "FETCH_FAILED" });

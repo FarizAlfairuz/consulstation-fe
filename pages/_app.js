@@ -1,7 +1,5 @@
 import "tailwindcss/tailwind.css";
 import "styles/tailwind.css";
-import Navbar from "components/Navbar/Navbar";
-import Footer from "components/Footer";
 import Head from "next/head";
 import Cookie from "js-cookie";
 import { useEffect, useState } from "react";
@@ -14,7 +12,7 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     setRole(roleCookie);
-  }, []);
+  }, [roleCookie]);
 
   return role === "admin" ? (
     <div>
