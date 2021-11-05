@@ -1,11 +1,11 @@
 import { PulseLoader } from "react-spinners"
 
 function Button(props) {
-  const { onClick, children, size, color, textColor, border, padding, type, disabled, loadingColor } = props;
+  const { onClick, children, size, color, textColor, border, padding, type, disabled, loadingColor, width } = props;
   return (
     <button
       type={type}
-      className={`font-nunito font-bold ${size} ${color} ${textColor} ${border} ${padding} rounded-md disabled:opacity-50`}
+      className={`font-nunito font-bold ${size} ${color} ${textColor} ${border} ${padding} ${width} rounded-md disabled:opacity-50`}
       onClick={onClick}
       disabled={disabled}
     >
@@ -25,7 +25,8 @@ Button.defaultProps = {
   border: "",
   padding: "py-1 px-5",
   type: "button",
-  loadingColor: "white"
+  loadingColor: "white",
+  width: ""
 };
 
 export default Button;

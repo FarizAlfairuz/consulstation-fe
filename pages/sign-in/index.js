@@ -1,7 +1,7 @@
 import AuthForm from "components/Forms/AuthForm";
 import Button from "components/Button";
 import Layout from "components/Layout";
-import Link from "next/link"
+import Link from "next/link";
 import { useLogin } from "hooks/user/useAuth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,7 +19,11 @@ const loginForm = [
 ];
 
 function LoginPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
     mode: "onTouched",
   });
@@ -29,7 +33,7 @@ function LoginPage() {
   // console.log(state)
 
   return (
-    <Layout padding="py-32">
+    <Layout padding="py-24">
       <div className="flex space-x-12 ">
         <div className="flex flex-col space-y-8  w-1/2">
           <div className="text-heading-1 font-black">
@@ -40,17 +44,23 @@ function LoginPage() {
             <p>if you don't have an account,</p>
             <div className="flex space-x-1">
               <p>You can </p>
-              <Link href="/sign-up"><a className="text-yellow-400">Register here!</a></Link>
+              <Link href="/sign-up">
+                <a className="text-orangeWeb">Register here!</a>
+              </Link>
             </div>
           </div>
+
           <img
             className="w-full"
-            src="https://i.kym-cdn.com/entries/icons/facebook/000/023/977/cover3.jpg"
+            src="/assets/images/auth-vector.png"
             alt="sign-up"
           />
         </div>
         <div className="flex flex-col w-1/2 items-start ">
-          <form className="flex flex-col w-4/5 space-y-6" onSubmit={handleSubmit(loginSubmit)} >
+          <form
+            className="flex flex-col w-4/5 space-y-6"
+            onSubmit={handleSubmit(loginSubmit)}
+          >
             {loginForm.map((input, index) => (
               <AuthForm
                 key={index}
@@ -62,7 +72,7 @@ function LoginPage() {
                 register={register}
               />
             ))}
-            <Button type="submit" padding="py-3 px-5" disabled={state.disabled} >
+            <Button type="submit" color="bg-goldCrayola" textColor="text-black" padding="py-3 px-5" disabled={state.disabled}>
               Sign In
             </Button>
           </form>

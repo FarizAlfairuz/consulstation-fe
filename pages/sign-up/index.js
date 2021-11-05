@@ -32,7 +32,7 @@ function RegisterPage() {
   const { state, registerSubmit } = useRegister()
 
   return (
-    <Layout padding="py-32">
+    <Layout padding="py-24">
       <div className="flex space-x-10">
         <div className="flex flex-col space-y-8  w-1/2">
           <div className="text-heading-1 font-black">
@@ -41,7 +41,7 @@ function RegisterPage() {
           </div>
           <img
             className="w-full"
-            src="https://i.kym-cdn.com/entries/icons/facebook/000/023/977/cover3.jpg"
+            src="/assets/images/auth-vector.png"
             alt="sign-up"
           />
         </div>
@@ -64,7 +64,7 @@ function RegisterPage() {
                 register={register}
               />
             ))}
-            <Button type="submit" padding="py-3 px-5" disabled={state.disabled} >Sign Up</Button>
+            <Button type="submit" color="bg-goldCrayola" textColor="text-black" padding="py-3 px-5" disabled={state.disabled} >Sign Up</Button>
           </form>
         </div>
       </div>

@@ -19,6 +19,7 @@ function useProfile(role) {
         .then((res) => {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
           setUsername(res.data.data.username);
+          console.log(res)
         })
         .catch(() => {
           dispatch({ type: "FETCH_FAILED" });

@@ -19,7 +19,7 @@ function usePartnership() {
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
         // console.log(res);
-        router.replace("/")
+        router.replace("/profile/user")
       })
       .catch(() => {
         dispatch({ type: "FETCH_FAILED" });

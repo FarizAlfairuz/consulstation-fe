@@ -3,6 +3,7 @@ import Cookie from "js-cookie";
 import Link from "next/link";
 import usePersistentState from "hooks/usePersistentState";
 import { useLogout } from "hooks/user/useAuth";
+import Dropdown from "./Dropdown";
 
 function LogStatus() {
   let logged;
@@ -14,12 +15,13 @@ function LogStatus() {
 
   return logged ? (
     <div className="flex w-2/6 justify-end space-x-6 items-center">
-      <Link href="/profile/user">
+      {/* <Link href="/profile/user">
         <a className="font-bold">Hi, {username !== null && username}</a>
       </Link>
       <div>
         <Button onClick={logout}>Logout</Button>
-      </div>
+      </div> */}
+      <Dropdown username={username} logout={logout} />
     </div>
   ) : (
     <div className="flex w-2/6 justify-end items-center space-x-2">

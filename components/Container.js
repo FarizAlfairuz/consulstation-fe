@@ -27,7 +27,7 @@ export const HeroCard = (props) => {
 
 export const TestiCard = () => {
   return (
-    <div className="flex flex-col space-y-2 w-64 bg-gray-300 rounded-xl p-5">
+    <div className="flex flex-col space-y-2 w-60 bg-goldCrayola rounded-xl p-5">
       <img
         className="h-16 w-16 rounded-full"
         src="https://spesialis1.orthopaedi.fk.unair.ac.id/wp-content/uploads/2021/02/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg"

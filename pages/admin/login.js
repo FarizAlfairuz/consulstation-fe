@@ -38,7 +38,7 @@ function login() {
           </div>
           <img
             className="w-full"
-            src="https://i.kym-cdn.com/entries/icons/facebook/000/023/977/cover3.jpg"
+            src="/assets/images/auth-vector.png"
             alt="sign-up"
           />
         </div>
@@ -58,7 +58,7 @@ function login() {
                 register={register}
               />
             ))}
-            <Button type="submit" padding="py-3 px-5" disabled={state.disabled}>
+            <Button type="submit" color="bg-goldCrayola" textColor="text-black" padding="py-3 px-5" disabled={state.disabled}>
               Sign In
             </Button>
           </form>
