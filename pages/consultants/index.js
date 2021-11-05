@@ -39,7 +39,7 @@ function ConsultantsPage(props) {
           className="w-full bg-transparent focus:outline-none"
           placeholder="Search..."
         />
-        <Button color="bg-yellow-600">Search</Button>
+        <Button color="bg-orangeWeb">Search</Button>
       </div>
       <div className="grid md:grid-cols-3 lg:grid-cols-4 grid-flow-row-dense gap-4">
         {/* {state.data.data &&

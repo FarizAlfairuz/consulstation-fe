@@ -29,7 +29,11 @@ function Navbar() {
                 <a>Consultants</a>
               </Link>
             </li>
-            <li>Contact Us</li>
+            <li>
+              <Link href="/article"> 
+                <a>Article</a>
+              </Link>
+            </li>
             <li>Help</li>
           </ul>
         </div>

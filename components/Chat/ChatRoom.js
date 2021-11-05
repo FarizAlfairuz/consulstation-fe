@@ -12,7 +12,7 @@ function ChatRoom() {
   const [username] = usePersistentState("username", null);
 
 
-  console.log(chatState.data.data);
+  // console.log(chatState.data.data);
 
   const { register, handleSubmit, reset } = useForm({
     mode: "onTouched",
@@ -21,6 +21,11 @@ function ChatRoom() {
   // useEffect(() => {
   //   reset({ message: ''})
   // },[reset])
+
+  const submit = (data) => {
+    sendChat(data)
+    setTimeout(() => { reset() }, 1000)
+  }
 
   return (
     <div className="relative bg-white rounded-tr-lg rounded-br-lg flex flex-col h-full">
@@ -35,7 +40,7 @@ function ChatRoom() {
           )
         )}
       </div>
-      <form className="flex p-3" onSubmit={handleSubmit(sendChat)}>
+      <form className="flex p-3" onSubmit={handleSubmit(submit)}>
         <input
           type="text"
           className="bg-gray-200 py-5 px-6 rounded-l-full w-full focus:outline-none"

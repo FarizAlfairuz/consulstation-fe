@@ -32,6 +32,19 @@ function Dropdown(props) {
           </Menu.Item>
           <Menu.Item>
             {({ active }) => (
+              <Link href="/chat">
+                <a
+                  className={`${
+                    active ? "text-orangeWeb cursor-pointer" : "text-black"
+                  } group flex rounded-md items-center w-full px-1 py-1`}
+                >
+                  Chat
+                </a>
+              </Link>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
               <div
                 className={`${
                   active ? "text-orangeWeb cursor-pointer" : "text-black"

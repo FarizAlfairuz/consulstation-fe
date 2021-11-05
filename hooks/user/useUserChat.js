@@ -63,7 +63,7 @@ function useUserChat() {
       .catch(() => {
         dispatchRoom({ type: "FETCH_FAILED" });
       });
-  });
+  }, [dispatchRoom]);
 
   useEffect(() => {
     getChat(selectedChat);
@@ -81,7 +81,7 @@ function useUserChat() {
     return () => {
       dispatchRoom({ type: "RESET" })
     }
-  }, [])
+  }, [getChatroom, dispatchRoom])
 
   return {
     initiateState,
