@@ -11,7 +11,7 @@ module.exports = withPWA({
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
+        source: '/:path*',
         destination: 'https://consulstation-api.herokuapp.com/api/:path*',
       },
     ]
