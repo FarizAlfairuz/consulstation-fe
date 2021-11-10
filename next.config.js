@@ -8,4 +8,12 @@ module.exports = withPWA({
     skipWaiting: true,
     disable: process.env.NODE_ENV === "development",
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://api.example.com/:path*',
+      },
+    ]
+  },
 });
