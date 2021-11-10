@@ -2,6 +2,7 @@ import ConsultantAPI from "api/ConsultantAPI";
 import Button from "components/Button";
 import Layout from "components/Layout";
 import useConsultant from "hooks/consultant/useConsultant";
+import useUserChat from "hooks/user/useUserChat";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { HashLoader } from "react-spinners";
@@ -40,6 +41,8 @@ export const getStaticProps = async (context) => {
 function ConsPublicProfilePage(props) {
   const { profile } = props
   console.log(profile)
+  const { initiateChat } = useUserChat();
+
   // const router = useRouter()
 
   // const { id } = router.pathname
@@ -87,6 +90,7 @@ function ConsPublicProfilePage(props) {
               color="bg-transparent"
               textColor="text-black"
               border="border border-black"
+              onClick={() => initiateChat(profile._id)}
             >
               Chat
             </Button>
