@@ -9,8 +9,7 @@ const refreshToken = Cookie.get("refreshToken");
 
 const API = axios.create({
   baseURL: baseURL,
-  headers: { Authorization: "Bearer " + Cookie.get("token") },
-  withCredentials: true,
+  headers: { Authorization: "Bearer " + Cookie.get("token") }
 });
 
 API.interceptors.response.use(
