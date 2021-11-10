@@ -12,7 +12,7 @@ module.exports = withPWA({
     return [
       {
         source: '/api/:path*',
-        destination: 'https://api.example.com/:path*',
+        destination: 'https://consulstation-api.herokuapp.com/:path*',
       },
     ]
   },
