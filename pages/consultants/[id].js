@@ -75,7 +75,7 @@ function ConsPublicProfilePage(props) {
             <div className="w-36 h-36 rounded-full bg-gray-100 overflow-hidden flex justify-center items-center">
               <img
                 className="object-center object-cover h-full w-full"
-                src="https://upload.wikimedia.org/wikipedia/commons/8/85/John_Lennon_1969_%28cropped%29.jpg"
+                src={profile.profilePicture.url}
                 alt="profile"
               />
             </div>

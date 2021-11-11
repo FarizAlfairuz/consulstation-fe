@@ -30,19 +30,19 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/article"> 
+              <Link href="/article">
                 <a>Article</a>
               </Link>
             </li>
             <li>Help</li>
           </ul>
         </div>
-        <LogStatus />
-        {/* <div className="hidden md:flex bg-red-300">
+        <div className="hidden md:block w-2/6 ">
+          <LogStatus />
         </div>
         <div className="block md:hidden">
           <MenuDropdown />
-        </div> */}
+        </div>
       </div>
     </nav>
   );

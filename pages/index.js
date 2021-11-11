@@ -4,7 +4,7 @@ import Container, { HeroCard, TestiCard } from "components/Container";
 export default function Home() {
   return (
     <div className="">
-      <Container bgColor="bg-gray-300">
+      <Container bgColor="bg-platinum">
         <div className="flex">
           <div className="max-w-3xl flex flex-col space-y-4">
             <h1 className="font-poppins text-4xl font-bold">
@@ -26,9 +26,9 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="hidden md:block w-3/4 ">
+          <div className="hidden lg:flex items-end lg:w-full">
             <img
-              className="w-full "
+              className="w-full"
               src="/assets/images/on-the-go.png"
               alt="sign-up"
             />
@@ -56,7 +56,7 @@ export default function Home() {
           />
         </div>
       </Container>
-      <Container bgColor="bg-gray-300">
+      <Container bgColor="bg-platinum">
         <div className="flex justify-center sm:space-x-10">
           <img
             className="max-h-72 hidden sm:block"
@@ -85,7 +85,7 @@ export default function Home() {
             Some testimonials from our users and consultant.
           </h4>
         </div>
-        <div className="flex mt-6 gap-2 justify-start flex-wrap">
+        <div className="flex mt-6 gap-4 justify-between flex-wrap">
           <TestiCard />
           <TestiCard />
           <TestiCard />

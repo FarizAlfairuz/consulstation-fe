@@ -34,8 +34,9 @@ function LoginPage() {
 
   return (
     <Layout padding="py-24">
-      <div className="flex space-x-12 ">
-        <div className="flex flex-col space-y-8  w-1/2">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-12 ">
+
+        <div className="flex flex-col space-y-4 md:space-y-8 w-full  md:w-1/2">
           <div className="text-heading-1 font-black">
             <h1>Sign In to</h1>
             <h1>Consulstation</h1>
@@ -51,14 +52,15 @@ function LoginPage() {
           </div>
 
           <img
-            className="w-full"
+            className="w-full hidden md:block"
             src="/assets/images/auth-vector.png"
             alt="sign-up"
           />
         </div>
-        <div className="flex flex-col w-1/2 items-start ">
+
+        <div className="flex flex-col w-full md:w-1/2 md:items-start ">
           <form
-            className="flex flex-col w-4/5 space-y-6"
+            className="flex flex-col md:w-4/5 space-y-6"
             onSubmit={handleSubmit(loginSubmit)}
           >
             {loginForm.map((input, index) => (

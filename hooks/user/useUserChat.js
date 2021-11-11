@@ -2,10 +2,12 @@ import ChatAPI from "api/ChatAPI";
 import useAPI from "hooks/useAPI";
 import createPersistedState from "use-persisted-state";
 import { useCallback, useEffect } from "react";
+import { useRouter } from "next/router";
+import Pusher from "pusher-js";
 
 const selectChat = createPersistedState("selected_chat");
 
-function useUserChat() {
+function useUserChat(page) {
   const [initiateState, dispatchInitiate] = useAPI();
   const [chatState, dispatchChat] = useAPI();
   const [sendState, dispatchSend] = useAPI();
@@ -13,14 +15,17 @@ function useUserChat() {
 
   const [selectedChat, setSelectedChat] = selectChat("");
 
+  const router = useRouter();
+
   const initiateChat = (id) => {
-    // console.log(id);
+    console.log(id);
     dispatchInitiate({ type: "REQUEST" });
     ChatAPI.initiate(id)
       .then((res) => {
         // console.log(res.data.data);
         dispatchInitiate({ type: "FETCH_SUCCESS", payload: res.data });
         setSelectedChat(res.data.data.chatRoomId);
+        router.push("/chat");
       })
       .catch(() => {
         dispatchInitiate({ type: "FETCH_FAILED" });
@@ -42,11 +47,12 @@ function useUserChat() {
 
   const sendChat = (data) => {
     dispatchSend({ type: "REQUEST" });
-    console.log(selectedChat);
+    console.log(data);
     ChatAPI.sendChat(selectedChat, data)
       .then((res) => {
         console.log(res.data);
         dispatchSend({ type: "FETCH_SUCCESS", payload: res.data });
+        window.location.reload();
       })
       .catch(() => {
         dispatchSend({ type: "FETCH_FAILED" });
@@ -65,23 +71,39 @@ function useUserChat() {
       });
   }, [dispatchRoom]);
 
-  useEffect(() => {
-    getChat(selectedChat);
-    // getChatroom()
+  if (page === "chat") {
+    useEffect(() => {
+      getChat(selectedChat);
+      // getChatroom()
 
-    return () => {
-      dispatchChat({ type: "RESET" });
-      // dispatchRoom({ type: "RESET" });
-    };
-  }, [getChat, dispatchChat, selectedChat]);
+      return () => {
+        dispatchChat({ type: "RESET" });
+        // dispatchRoom({ type: "RESET" });
+      };
+    }, [getChat, dispatchChat, selectedChat]);
 
-  useEffect(() => {
-    getChatroom()
+    useEffect(() => {
+      getChatroom();
 
-    return () => {
-      dispatchRoom({ type: "RESET" })
-    }
-  }, [getChatroom, dispatchRoom])
+      return () => {
+        dispatchRoom({ type: "RESET" });
+      };
+    }, [getChatroom, dispatchRoom]);
+
+    useEffect(() => {
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
+
+      const pusher = new Pusher("6f601d120efc72cfe760", {
+        cluster: "ap1",
+      });
+
+      const channel = pusher.subscribe("my-channel");
+      channel.bind("my-event", function (data) {
+        alert(JSON.stringify(data));
+      });
+    });
+  }
 
   return {
     initiateState,
@@ -92,7 +114,7 @@ function useUserChat() {
     getChat,
     sendChat,
     sendState,
-    roomState
+    roomState,
   };
 }
 
