@@ -9,7 +9,7 @@ const ArticleAPI = {
   createArticle(data) {
     return API.post("/article", data, {
       headers: { Authorization: "Bearer " + Cookie.get("token") },
-      withCredentials: false,
+      withCredentials: true,
     });
   },
 };

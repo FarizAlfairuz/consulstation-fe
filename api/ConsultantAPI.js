@@ -13,7 +13,7 @@ const ConsultantAPI = {
   getConsProfile() {
     return API.get("/consultant/profile", {
       headers: { Authorization: "Bearer " + Cookie.get("token") },
-      withCredentials: false,
+      withCredentials: true,
     })
   }
 };
