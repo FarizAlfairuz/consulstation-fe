@@ -21,8 +21,8 @@ function ChatPage() {
   // console.log(room)
   const ChatRoom = dynamic(() => import("components/Chat/ChatRoom"));
   
-  const { initiateChat, selectedChat, roomState } = useUserChat();
-  // console.log(roomState.data.data);
+  const { initiateChat, selectedChat, roomState } = useUserChat("chat");
+  console.log(roomState.data.data);
 
   return (
     <Layout>
@@ -31,8 +31,8 @@ function ChatPage() {
         Let’s have a chat with your consultant!
       </h4>
 
-      <div className="bg-gray-200 grid grid-cols-3 rounded-lg min-h-half-screen ">
-        <div className="col-span-1 p-6 space-y-4">
+      <div className="bg-gray-200 grid grid-cols-1 sm:grid-cols-3 rounded-lg min-h-half-screen ">
+        <div className="hidden sm:block sm:col-span-1 p-6 space-y-4">
           {/* <h6 className="text-paragraph-1 font-bold mb-4">Active Consultant</h6>
           <ActiveChatCard /> */}
           <h6 className="text-paragraph-1 font-bold mb-4">Other Consultants</h6>
@@ -43,7 +43,7 @@ function ChatPage() {
                   consultantId={cons.otherUser._id}
                   name={cons.otherUser.username}
                   picture={cons.otherUser.profilePicture.url}
-                  onClick={() => initiateChat(cons._id)}
+                  onClick={() => initiateChat(cons.consultantId, cons.isPaid)}
                 />
               ))}
           </div>
@@ -51,7 +51,14 @@ function ChatPage() {
 
         {/* Chat Room */}
 
-        <div className="col-span-2 bg-gray-300 rounded-tr-lg rounded-br-lg p-6">
+        <div className="col-span-1 sm:col-span-2 bg-gray-300 rounded-tr-lg rounded-br-lg p-6">
+          {/* {roomState.data.data && roomState.data.data.isPaid ? (
+            <ChatRoom />
+          ) : (
+            <div className="relative h-full flex justify-center items-center bg-white rounded-tr-lg rounded-br-lg">
+              Click on consultant to start a chat
+            </div>
+          ) } */}
           {selectedChat !== undefined ? (
             <ChatRoom />
           ) : (

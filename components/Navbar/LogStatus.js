@@ -14,7 +14,7 @@ function LogStatus() {
   const { logout } = useLogout();
 
   return logged ? (
-    <div className="flex w-2/6 justify-end space-x-6 items-center">
+    <div className="flex justify-end space-x-6 items-center">
       {/* <Link href="/profile/user">
         <a className="font-bold">Hi, {username !== null && username}</a>
       </Link>
@@ -24,7 +24,7 @@ function LogStatus() {
       <Dropdown username={username} logout={logout} />
     </div>
   ) : (
-    <div className="flex w-2/6 justify-end items-center space-x-2">
+    <div className="flex justify-end items-center space-x-2">
       <Button
         color="bg-white"
         textColor="text-black"

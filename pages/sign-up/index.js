@@ -33,20 +33,22 @@ function RegisterPage() {
 
   return (
     <Layout padding="py-24">
-      <div className="flex space-x-10">
-        <div className="flex flex-col space-y-8  w-1/2">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-10">
+
+        <div className="flex flex-col space-y-4 md:space-y-8  w-full  md:w-1/2">
           <div className="text-heading-1 font-black">
             <h1>Sign Up to</h1>
             <h1>Consulstation</h1>
           </div>
           <img
-            className="w-full"
+            className="w-full hidden md:block"
             src="/assets/images/auth-vector.png"
             alt="sign-up"
           />
         </div>
-        <div className="flex flex-col w-1/2 items-start ">
-          <form className="flex flex-col w-5/6 space-y-6 " onSubmit={handleSubmit(registerSubmit)}>
+
+        <div className="flex flex-col w-full md:w-1/2 md:items-start ">
+          <form className="flex flex-col md:w-5/6 space-y-6 " onSubmit={handleSubmit(registerSubmit)}>
 
             <div className="space-x-6 flex">
               <AuthForm type="text" placeholder="First Name" name="firstName" error={errors} register={register} />

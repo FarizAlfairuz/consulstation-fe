@@ -45,7 +45,8 @@ function useLogin(role) {
           setUsername(data.username);
           router.replace("/");
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err)
           dispatch({ type: "FETCH_FAILED" });
         });
     } else {

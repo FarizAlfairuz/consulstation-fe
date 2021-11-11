@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function ConsultantCard(props) {
   const { username, id } = props;
-  const { initiateChat } = useUserChat();
+  const { initiateChat } = useUserChat("consultant");
 
   return (
     <Link href={`/consultants/${id}`}>

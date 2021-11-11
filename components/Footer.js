@@ -3,34 +3,34 @@ import Container from "./Container";
 
 function Footer() {
   return (
-    <Container bgColor="bg-gray-400">
+    <Container bgColor="bg-white">
       <div className="flex flex-col space-y-10 relative">
-        <div className="flex justify-between items-center">
-          <div className="font-poppins font-bold text-4xl">
+        <div className="flex flex-wrap gap-4 justify-center sm:justify-between items-center">
+          <div className="font-poppins  font-bold text-4xl">
             <div>Consul</div>
             <div>station</div>
           </div>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap justify-between sm:justify-end space-x-2 ">
             <div>facebook</div>
             <div>twitter</div>
             <div>youtube</div>
             <div>instagram</div>
           </div>
         </div>
-        <div className="flex justify-between items-center font-nunito font-bold text-lg">
-          <div className="flex flex-col w-96 space-y-2">
-            <div className="flex justify-between">
+        <div className="flex justify-center sm:justify-between flex-wrap gap-4 items-center font-nunito font-bold text-lg">
+          <div className="flex flex-col flex-wrap w-96 space-y-2">
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-between">
               <div>about us</div>
               <div>contact us</div>
             </div>
-            <div className="flex justify-between">
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-between">
               <div>customer</div>
               <div>blog</div>
             </div>
           </div>
-          <div className="flex flex-col items-end space-y-2 ">
-            <div className="font-nunito font-bold text-sm">Are you a consultant?</div>
-            <Button color="bg-white" textColor="text-black" padding="px-14 py-2">
+          <div className="flex flex-col items-center sm:items-end space-y-2 ">
+            <h6 className="font-nunito font-bold text-sm">Are you a consultant?</h6>
+            <Button padding="px-6 py-1 sm:px-14 sm:py-2">
               Register
             </Button>
           </div>
