@@ -77,6 +77,7 @@ function useLogout() {
 
     AuthAPI.logout({ refreshToken })
       .then(() => {
+        localStorage.removeItem("selected_chat")
         Cookie.remove("token");
         Cookie.remove("refreshToken");
         Cookie.remove("logged");

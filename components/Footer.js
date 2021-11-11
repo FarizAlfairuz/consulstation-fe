@@ -6,7 +6,7 @@ function Footer() {
     <Container bgColor="bg-white">
       <div className="flex flex-col space-y-10 relative">
         <div className="flex flex-wrap gap-4 justify-center sm:justify-between items-center">
-          <div className="font-poppins  font-bold text-4xl">
+          <div className="font-poppins font-bold text-4xl">
             <div>Consul</div>
             <div>station</div>
           </div>
