@@ -10,7 +10,9 @@ import withAuth from "HOC/user/withAuth";
 import Link from "next/link";
 import { MoonLoader } from "react-spinners";
 import PhotoForm from "components/Forms/PhotoForm";
-import Cookie from "js-cookie"
+import Cookie from "js-cookie";
+import usePartnership from "hooks/user/usePartnership";
+import PlanForm from "components/Forms/PlanForm";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -26,20 +28,22 @@ const profileForm = [
   { type: "tel", label: "Phone Number", name: "phone" },
 ];
 
-
 function UserProfilePage() {
-  const role = Cookie.get("role")
+  const role = Cookie.get("role");
   // console.log(role)
   const { state, editProfile } = useProfile(role);
   const [isEditing, setIsEditing] = useState(false);
-  const [upload, setUpload] = useState(null)
+  const [isCreating, setIsCreating] = useState(false);
+  const [upload, setUpload] = useState(null);
+
+  const { plans } = usePartnership("profile");
+  console.log(plans);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    watch,
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onTouched",
@@ -92,7 +96,7 @@ function UserProfilePage() {
         )}
       </div>
       <div className="space-y-5">
-        <div className="bg-gray-300 p-6 rounded-lg">
+        <div className="bg-white p-6 rounded-lg">
           <form onSubmit={handleSubmit(editProfile)}>
             <div className="flex justify-between items-center space-x-3 ">
               <div className="flex space-x-3 ">
@@ -118,6 +122,7 @@ function UserProfilePage() {
                   <Button
                     color="bg-white"
                     textColor="text-black"
+                    border="border border-black"
                     onClick={() => setIsEditing(false)}
                   >
                     Save
@@ -127,6 +132,7 @@ function UserProfilePage() {
                     type="submit"
                     color="bg-white"
                     textColor="text-black"
+                    border="border border-black"
                     onClick={() => setIsEditing(true)}
                   >
                     Edit Profile
@@ -148,7 +154,7 @@ function UserProfilePage() {
           </form>
           <PhotoForm setUpload={setUpload} />
         </div>
-        <div className="flex justify-between items-center bg-gray-300 p-6 rounded-lg">
+        {/* <div className="flex justify-between items-center bg-gray-300 p-6 rounded-lg">
           <div className="space-y-1">
             <p className="font-nunito text-base">Change Password</p>
             <p className="font-nunito text-base font-bold">
@@ -160,22 +166,63 @@ function UserProfilePage() {
               Change
             </Button>
           </div>
-        </div>
-        <div className="flex justify-between items-center bg-gray-300 p-6 rounded-lg">
-          <div className="space-y-1">
-            <p className="font-nunito text-base">Become a consultant</p>
-            <p className="font-nunito text-base font-bold">
-              Are you a bussines consultant? Register now!
-            </p>
+        </div> */}
+        {role === "user" ? (
+          <div className="flex justify-between items-center bg-white p-6 rounded-lg">
+            <div className="space-y-1">
+              <p className="font-nunito text-base">Become a consultant</p>
+              <p className="font-nunito text-base font-bold">
+                Are you a bussines consultant? Register now!
+              </p>
+            </div>
+            <div>
+              <Button
+                color="bg-white"
+                textColor="text-black"
+                border="border border-black"
+              >
+                <Link href="/contract/registration">
+                  <a>Register</a>
+                </Link>
+              </Button>
+            </div>
           </div>
-          <div>
-            <Button color="bg-white" textColor="text-black">
-              <Link href="/contract/registration">
-                <a>Register</a>
-              </Link>
-            </Button>
+        ) : (
+          <div className="flex flex-col space-y-3 bg-white p-6 rounded-lg">
+            {isCreating ? (
+              <PlanForm />
+            ) : (
+              <div className="flex justify-between items-center ">
+                <div className="space-y-1">
+                  <p className="font-nunito text-base">Contract Plan</p>
+                  <p className="font-nunito text-base font-bold">
+                    Your contract plan will apear below
+                  </p>
+                </div>
+                <div>
+                  <Button
+                    color="bg-white"
+                    textColor="text-black"
+                    border="border border-black"
+                    onClick={() => setIsCreating(true)}
+                  >
+                    New Contract
+                  </Button>
+                </div>
+              </div>
+            )}
+            {plans.data.data &&
+              plans.data.data.map((plan, index) => (
+                <div key={index} className="bg-platinum space-y-2 p-5 rounded-lg">
+                  <div>{plan.title}</div>
+                  <div className="flex justify-between text-paragraph-heading font-bold space-x-4">
+                    <h4 className="truncate">{plan.description}</h4>
+                    <h4>{"Rp. " + plan.price.toLocaleString()}</h4>
+                  </div>
+                </div>
+              ))}
           </div>
-        </div>
+        )}
       </div>
     </Layout>
   );

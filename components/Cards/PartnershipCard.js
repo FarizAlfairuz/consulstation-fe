@@ -20,8 +20,14 @@ function PartnershipCard(props) {
       </div>
 
       <div className="space-y-2 flex flex-col justify-center items-center">
-        <Button width="w-full">CV</Button>
-        {req.accepted ? null : <Button width="w-full" onClick={accept} loading={loading} >Accept</Button>}
+        <Button width="w-full">
+          <a href={req.cv.url}>CV</a>
+        </Button>
+        {req.accepted ? null : (
+          <Button width="w-full" onClick={accept} loading={loading}>
+            Accept
+          </Button>
+        )}
       </div>
     </div>
   );

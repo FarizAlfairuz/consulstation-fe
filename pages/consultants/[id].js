@@ -39,8 +39,8 @@ export const getStaticProps = async (context) => {
 };
 
 function ConsPublicProfilePage(props) {
-  const { profile } = props
-  console.log(profile)
+  const { profile } = props;
+  console.log(profile);
   const { initiateChat } = useUserChat();
 
   // const router = useRouter()
@@ -80,7 +80,9 @@ function ConsPublicProfilePage(props) {
               />
             </div>
             <div className="flex flex-col justify-between py-2">
-              <h4 className="text-heading-3 font-bold">{profile.firstName + " " + profile.lastName}</h4>
+              <h4 className="text-heading-3 font-bold">
+                {profile.firstName + " " + profile.lastName}
+              </h4>
               <h5 className="text-paragraph-heading ">Personal Account</h5>
               <h5 className="text-paragraph-heading ">5 years</h5>
             </div>
@@ -111,9 +113,9 @@ function ConsPublicProfilePage(props) {
             quam duis consequat etiam ornare pulvinar.
           </p>
         </div>
+        
 
-        <div className="bg-white p-6 rounded-lg space-y-8">
-          {/* Job position */}
+        {/* <div className="bg-white p-6 rounded-lg space-y-8">
           <div className="flex space-x-8">
             <div className="w-16 h-16 rounded-full bg-gray-100 overflow-hidden flex justify-center items-center">
               <img
@@ -150,8 +152,21 @@ function ConsPublicProfilePage(props) {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
+      <div className="space-y-2 bg-gray-200 p-9 rounded-lg">
+          <h4 className="text-heading-3 font-black">Plan</h4>
+
+          {profile.contracts.map((plan, index) => (
+            <div key={index} className="bg-white space-y-2 p-5 rounded-lg">
+              <div>{plan.title}</div>
+              <div className="flex justify-between text-paragraph-heading font-bold space-x-4">
+                <h4 className="truncate">{plan.description}</h4>
+                <h4>{"Rp. " + plan.price.toLocaleString()}</h4>
+              </div>
+            </div>
+          ))}
+        </div>
     </Layout>
   );
 }

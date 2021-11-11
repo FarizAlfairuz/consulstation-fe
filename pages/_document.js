@@ -15,7 +15,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           ></link>
         </Head>
-        <body className="bg-cultured scrollbar-thin scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700 scrollbar-track-gray-300 hover:scrollbar-track-gray-400 overflow-y-scroll scrollbar-thumb-rounded-full">
+        <body className=" scrollbar-thin scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700 scrollbar-track-gray-300 hover:scrollbar-track-gray-400 overflow-y-scroll scrollbar-thumb-rounded-full">
           <Main />
           <NextScript />
         </body>

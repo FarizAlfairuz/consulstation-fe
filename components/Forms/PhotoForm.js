@@ -62,12 +62,14 @@ function PhotoForm(props) {
               }}
               color="bg-white"
               textColor="text-black"
+              border="border border-black"
             >
               Change Picture
             </Button>
             <Button
               color="bg-white"
               textColor="text-black"
+              border="border border-black"
               loadingColor="gray"
               onClick={() => deletePhoto()}
               disabled={deleteState.disabled}

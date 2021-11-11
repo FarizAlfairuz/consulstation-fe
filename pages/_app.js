@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <UserTemplate>
-        <Component {...pageProps} />
+        <Component {...pageProps}  />
       </UserTemplate>
     </div>
   );

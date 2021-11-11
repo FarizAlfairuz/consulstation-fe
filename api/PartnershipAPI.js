@@ -21,6 +21,20 @@ const PartnershipAPI = {
             headers: { Authorization: "Bearer " + Cookie.get("token") },
             withCredentials: true,
           })
+    },
+
+    plan(data) {
+        return API.post("/contractPlan", data, {
+            headers: { Authorization: "Bearer " + Cookie.get("token") },
+            withCredentials: true,
+          })
+    },
+
+    getPlan() {
+        return API.get("/contractPlans", {
+            headers: { Authorization: "Bearer " + Cookie.get("token") },
+            withCredentials: true,
+          })
     }
 }
 
