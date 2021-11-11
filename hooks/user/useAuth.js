@@ -41,6 +41,8 @@ function useLogin(role) {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
           Cookie.set("logged", true);
           Cookie.set("role", res.data.data.role);
+          Cookie.set("token", res.data.data.token);
+          Cookie.set("refreshToken", res.data.data.refreshToken);
           // console.log(res)
           setUsername(data.username);
           router.replace("/");
@@ -55,6 +57,8 @@ function useLogin(role) {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
           Cookie.set("logged", true);
           Cookie.set("role", res.data.data.role);
+          Cookie.set("token", res.data.data.token);
+          Cookie.set("refreshToken", res.data.data.refreshToken);
           // console.log(res)
           router.replace("/admin/dashboard");
         })
