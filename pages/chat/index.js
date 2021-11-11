@@ -22,7 +22,7 @@ function ChatPage() {
   const ChatRoom = dynamic(() => import("components/Chat/ChatRoom"));
   
   const { initiateChat, selectedChat, roomState } = useUserChat("chat");
-  // console.log(roomState.data.data);
+  console.log(roomState.data.data);
 
   return (
     <Layout>
@@ -43,7 +43,7 @@ function ChatPage() {
                   consultantId={cons.otherUser._id}
                   name={cons.otherUser.username}
                   picture={cons.otherUser.profilePicture.url}
-                  onClick={() => initiateChat(cons.consultantId)}
+                  onClick={() => initiateChat(cons.consultantId, cons.isPaid)}
                 />
               ))}
           </div>
@@ -52,6 +52,13 @@ function ChatPage() {
         {/* Chat Room */}
 
         <div className="col-span-1 sm:col-span-2 bg-gray-300 rounded-tr-lg rounded-br-lg p-6">
+          {/* {roomState.data.data && roomState.data.data.isPaid ? (
+            <ChatRoom />
+          ) : (
+            <div className="relative h-full flex justify-center items-center bg-white rounded-tr-lg rounded-br-lg">
+              Click on consultant to start a chat
+            </div>
+          ) } */}
           {selectedChat !== undefined ? (
             <ChatRoom />
           ) : (

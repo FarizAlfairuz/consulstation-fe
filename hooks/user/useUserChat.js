@@ -3,7 +3,6 @@ import useAPI from "hooks/useAPI";
 import createPersistedState from "use-persisted-state";
 import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
-import Pusher from "pusher-js";
 
 const selectChat = createPersistedState("selected_chat");
 
@@ -22,7 +21,7 @@ function useUserChat(page) {
     dispatchInitiate({ type: "REQUEST" });
     ChatAPI.initiate(id)
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         dispatchInitiate({ type: "FETCH_SUCCESS", payload: res.data });
         setSelectedChat(res.data.data.chatRoomId);
         router.push("/chat");
@@ -63,7 +62,7 @@ function useUserChat(page) {
     dispatchRoom({ type: "REQUEST" });
     ChatAPI.getChatroom()
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         dispatchRoom({ type: "FETCH_SUCCESS", payload: res.data });
       })
       .catch(() => {
@@ -90,19 +89,7 @@ function useUserChat(page) {
       };
     }, [getChatroom, dispatchRoom]);
 
-    useEffect(() => {
-      // Enable pusher logging - don't include this in production
-      Pusher.logToConsole = true;
-
-      const pusher = new Pusher("6f601d120efc72cfe760", {
-        cluster: "ap1",
-      });
-
-      const channel = pusher.subscribe("my-channel");
-      channel.bind("my-event", function (data) {
-        alert(JSON.stringify(data));
-      });
-    });
+    
   }
 
   return {
