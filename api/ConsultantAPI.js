@@ -1,5 +1,5 @@
 import API from "./API";
-// import TokenAPI from "./TokenAPI"
+import Cookie from "js-cookie";
 
 const ConsultantAPI = {
   getConsultants() {
@@ -11,7 +11,10 @@ const ConsultantAPI = {
   },
 
   getConsProfile() {
-    return API.get("/consultant/profile")
+    return API.get("/consultant/profile", {
+      headers: { Authorization: "Bearer " + Cookie.get("token") },
+      withCredentials: false,
+    })
   }
 };
 
