@@ -8,9 +8,7 @@ const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
 const refreshToken = Cookie.get("refreshToken");
 
 const API = axios.create({
-  baseURL: baseURL,
-  headers: { Authorization: "Bearer " + Cookie.get("token") },
-  withCredentials: false
+  baseURL: baseURL
 });
 
 API.interceptors.response.use(
