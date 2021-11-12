@@ -38,7 +38,7 @@ function useLogin(role) {
       AuthAPI.login(data)
         .then((res) => {
           router.replace("/");
-          if (res.data.succes) {
+          if (res.data.success) {
             dispatch({ type: "FETCH_SUCCESS", payload: res.data });
             Cookie.set("logged", true);
             Cookie.set("role", res.data.data.role);
