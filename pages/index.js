@@ -1,5 +1,6 @@
 import Button from "components/Button";
 import Container, { HeroCard, TestiCard } from "components/Container";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -16,14 +17,18 @@ export default function Home() {
             </h4>
 
             <div className="flex space-x-4 ">
-              <HeroCard
-                image="https://media.istockphoto.com/vectors/search-magnifying-glass-icon-symbol-vector-id1221635138"
-                title="Search Consultants"
-              />
-              <HeroCard
-                image="https://media.istockphoto.com/vectors/search-magnifying-glass-icon-symbol-vector-id1221635138"
-                title="Chatting with Consultants"
-              />
+              <Link href="/consultants">
+                <HeroCard
+                  image="https://media.istockphoto.com/vectors/search-magnifying-glass-icon-symbol-vector-id1221635138"
+                  title="Search Consultants"
+                />
+              </Link>
+              <Link href="/consultants">
+                <HeroCard
+                  image="https://media.istockphoto.com/vectors/search-magnifying-glass-icon-symbol-vector-id1221635138"
+                  title="Chatting with Consultants"
+                />
+              </Link>
             </div>
           </div>
           <div className="hidden lg:flex items-end lg:w-full">
