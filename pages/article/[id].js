@@ -1,31 +1,43 @@
 import ArticleAPI from "api/ArticleAPI";
 import Layout from "components/Layout";
 
-export const getStaticPaths = async () => {
-  const articles = await ArticleAPI.getArticle().then((res) => res.data.data);
+// export const getStaticPaths = async () => {
+//   const articles = await ArticleAPI.getArticle().then((res) => res.data.data);
 
-  const paths = articles.map((article) => {
-    return {
-      params: { id: article._id },
-    };
-  });
+//   const paths = articles.map((article) => {
+//     return {
+//       params: { id: article._id },
+//     };
+//   });
 
-  return {
-    paths: paths,
-    fallback: false,
-  };
-};
+//   return {
+//     paths: paths,
+//     fallback: false,
+//   };
+// };
 
-export const getStaticProps = async (context) => {
+// export const getStaticProps = async (context) => {
+//   const id = context.params.id;
+
+//   const response = await ArticleAPI.getById(id).then((res) => res.data.data);
+//   return {
+//     props: {
+//       article: response,
+//     },
+//   };
+// };
+
+export const getServerSideProps = async (context) => {
   const id = context.params.id;
 
   const response = await ArticleAPI.getById(id).then((res) => res.data.data);
+
   return {
-    props: {
+    props:{
       article: response,
-    },
-  };
-};
+    }
+  }
+}
 
 function ArticleDetailPage(props) {
   const { article } = props;

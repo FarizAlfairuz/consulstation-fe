@@ -4,24 +4,38 @@ import Layout from "components/Layout";
 import useUserChat from "hooks/user/useUserChat";
 
 
-export const getStaticPaths = async () => {
-  const cons = await ConsultantAPI.getConsultants().then(
-    (res) => res.data.data
-  );
+// export const getStaticPaths = async () => {
+//   const cons = await ConsultantAPI.getConsultants().then(
+//     (res) => res.data.data
+//   );
 
-  const paths = cons.map((c) => {
-    return {
-      params: { id: c._id },
-    };
-  });
+//   const paths = cons.map((c) => {
+//     return {
+//       params: { id: c._id },
+//     };
+//   });
 
-  return {
-    paths: paths,
-    fallback: false,
-  };
-};
+//   return {
+//     paths: paths,
+//     fallback: false,
+//   };
+// };
 
-export const getStaticProps = async (context) => {
+// export const getStaticProps = async (context) => {
+//   const id = context.params.id;
+
+//   const response = await ConsultantAPI.getPublicProfile(id).then(
+//     (res) => res.data.data
+//   );
+
+//   return {
+//     props: {
+//       profile: response,
+//     },
+//   };
+// };
+
+export const getServerSideProps = async (context) => {
   const id = context.params.id;
 
   const response = await ConsultantAPI.getPublicProfile(id).then(
@@ -29,11 +43,11 @@ export const getStaticProps = async (context) => {
   );
 
   return {
-    props: {
+    props:{
       profile: response,
-    },
-  };
-};
+    }
+  }
+}
 
 function ConsPublicProfilePage(props) {
   const { profile } = props;
