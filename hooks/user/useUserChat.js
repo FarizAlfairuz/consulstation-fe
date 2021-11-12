@@ -5,6 +5,8 @@ import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 
 const selectChat = createPersistedState("selected_chat");
+const selectConsId = createPersistedState("selected_cons_id");
+const selectIsPaid = createPersistedState("is_paid");
 
 function useUserChat(page) {
   const [initiateState, dispatchInitiate] = useAPI();
@@ -13,15 +15,21 @@ function useUserChat(page) {
   const [roomState, dispatchRoom] = useAPI();
 
   const [selectedChat, setSelectedChat] = selectChat("");
+  const [selectedId, setSelectedId] = selectConsId("");
+  const [isPaid, setIsPaid] = selectIsPaid(true);
+  
 
   const router = useRouter();
 
+
   const initiateChat = (id) => {
-    console.log(id);
+    // console.log(id);
+    setSelectedId(id)
+    
     dispatchInitiate({ type: "REQUEST" });
     ChatAPI.initiate(id)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         dispatchInitiate({ type: "FETCH_SUCCESS", payload: res.data });
         setSelectedChat(res.data.data.chatRoomId);
         router.push("/chat");
@@ -49,7 +57,7 @@ function useUserChat(page) {
     console.log(data);
     ChatAPI.sendChat(selectedChat, data)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatchSend({ type: "FETCH_SUCCESS", payload: res.data });
         window.location.reload();
       })
@@ -62,7 +70,7 @@ function useUserChat(page) {
     dispatchRoom({ type: "REQUEST" });
     ChatAPI.getChatroom()
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatchRoom({ type: "FETCH_SUCCESS", payload: res.data });
       })
       .catch(() => {
@@ -70,14 +78,20 @@ function useUserChat(page) {
       });
   }, [dispatchRoom]);
 
+  const getIsPaid = useCallback((id, isPaid) => {
+    // console.log("function " + isPaid)
+    if (id === selectedId) {
+      // console.log("tes")
+      setIsPaid(isPaid)
+    }
+  }, [setIsPaid])
+
   if (page === "chat") {
     useEffect(() => {
       getChat(selectedChat);
-      // getChatroom()
 
       return () => {
         dispatchChat({ type: "RESET" });
-        // dispatchRoom({ type: "RESET" });
       };
     }, [getChat, dispatchChat, selectedChat]);
 
@@ -88,8 +102,6 @@ function useUserChat(page) {
         dispatchRoom({ type: "RESET" });
       };
     }, [getChatroom, dispatchRoom]);
-
-    
   }
 
   return {
@@ -102,6 +114,9 @@ function useUserChat(page) {
     sendChat,
     sendState,
     roomState,
+    getIsPaid,
+    setIsPaid,
+    isPaid
   };
 }
 

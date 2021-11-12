@@ -1,11 +1,8 @@
 import ConsultantAPI from "api/ConsultantAPI";
 import Button from "components/Button";
 import Layout from "components/Layout";
-import useConsultant from "hooks/consultant/useConsultant";
 import useUserChat from "hooks/user/useUserChat";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { HashLoader } from "react-spinners";
+
 
 export const getStaticPaths = async () => {
   const cons = await ConsultantAPI.getConsultants().then(
@@ -43,22 +40,11 @@ function ConsPublicProfilePage(props) {
   console.log(profile);
   const { initiateChat } = useUserChat();
 
-  // const router = useRouter()
+  const date = new Date()
+  const thisYear = date.getFullYear()
+  const work = thisYear - profile.startingYear
 
-  // const { id } = router.pathname
-
-  // const { profile, getPublicProfile } = useConsultant()
-  // useEffect(() => {
-  //   getPublicProfile(id)
-  // }, [id])
-
-  // console.log(profile)
-
-  // profile.loading ? (
-  //   <div className="h-screen w-screen flex justify-center items-center">
-  //     <HashLoader size={60} color="gray" />
-  //   </div>
-  // ) :
+  
   return (
     <Layout>
       <div className="max-w-3xl flex flex-col space-y-4">
@@ -84,7 +70,7 @@ function ConsPublicProfilePage(props) {
                 {profile.firstName + " " + profile.lastName}
               </h4>
               <h5 className="text-paragraph-heading ">Personal Account</h5>
-              <h5 className="text-paragraph-heading ">5 years</h5>
+              <h5 className="text-paragraph-heading ">{work} years</h5>
             </div>
           </div>
           <div>

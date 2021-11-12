@@ -5,40 +5,41 @@ import useUserChat from "hooks/user/useUserChat";
 // import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import usePersistentState from "hooks/usePersistentState";
+import Button from "components/Button";
+import useTransaction from "hooks/user/useTransaction";
 
-
-function ChatRoom() {
-  const { chatState, sendChat } = useUserChat("chat");
+function ChatRoom(props) {
+  const { isPaid } = props;
+  const { chatState, sendChat, selectedChat } = useUserChat("chat");
   const [username] = usePersistentState("username", null);
 
-
-  // console.log(chatState.data.data);
+  const { state, createTransaction } = useTransaction();
+  console.log(state);
 
   const { register, handleSubmit, reset } = useForm({
     mode: "onTouched",
   });
 
-  // useEffect(() => {
-  //   reset({ message: ''})
-  // },[reset])
 
   const submit = (data) => {
-    sendChat(data)
-    setTimeout(() => { reset() }, 500)
-  }
+    sendChat(data);
+    setTimeout(() => {
+      reset();
+    }, 500);
+  };
 
-  return (
+  return isPaid ? (
     <div className="relative bg-white rounded-tr-lg rounded-br-lg flex flex-col h-full">
+      {/* <div className="bg-platinum py-2 px-4">hehe</div> */}
       <div className="bg-white rounded-tr-lg h-full max-h-75-screen overflow-scroll  p-6 space-y-3 flex flex-col-reverse scrollbar-thin scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700 scrollbar-track-transparent hover:scrollbar-track-gray-200 overflow-y-scroll scrollbar-thumb-rounded-full">
-        {/* <SenderChat />
-        <SenderChat /> */}
-        {chatState.data.data && chatState.data.data.map((chat, index) => 
-          chat.sender.username === username ? (
-            <SenderChat key={index} chat={chat} />
-          ) : (
-            <ReceiverChat key={index} chat={chat} />
-          )
-        )}
+        {chatState.data.data &&
+          chatState.data.data.map((chat, index) =>
+            chat.sender.username === username ? (
+              <SenderChat key={index} chat={chat} />
+            ) : (
+              <ReceiverChat key={index} chat={chat} />
+            )
+          )}
       </div>
       <form className="flex p-3" onSubmit={handleSubmit(submit)}>
         <input
@@ -55,6 +56,17 @@ function ChatRoom() {
           <PaperAirplaneIcon className="w-5 h-5 sm:w-6 sm:h-6 md:w-9 md:h-9 text-white rotate-90" />
         </button>
       </form>
+    </div>
+  ) : (
+    <div className="relative h-full flex flex-col space-y-8 justify-center items-center bg-white rounded-tr-lg rounded-br-lg">
+      <div>Please continue to payment to start a chat with this consultant</div>
+      <Button
+        color="bg-orangeWeb"
+        onClick={() => createTransaction(selectedChat)}
+        disabled={state.disabled}
+      >
+        Continue to Payment
+      </Button>
     </div>
   );
 }

@@ -1,9 +1,22 @@
-import { PaperAirplaneIcon } from "@heroicons/react/solid";
-import ReceiverChat from "components/Chat/ReceiverChat";
-import SenderChat from "components/Chat/SenderChat";
+import useUserChat from "hooks/user/useUserChat";
+import { useEffect } from "react";
+
 
 function ChatListCard(props) {
-  const { name, picture, onClick } = props;
+  const { name, picture, onClick, isPaid, consultantId } = props;
+
+  const { getIsPaid } = useUserChat();
+  
+  // console.log(consultantId)
+  // console.log("chatcard " + isPaid)
+  useEffect(() => {
+    getIsPaid(consultantId, isPaid)
+
+    // return () => {
+    //   setIsPaid(true)
+    // }
+  },[consultantId])
+
 
   return (
     <div
@@ -36,24 +49,5 @@ function ActiveChatCard() {
   );
 }
 
-// function ChatRoom() {
-//   return (
-//     <div className="relative bg-white rounded-tr-lg rounded-br-lg flex flex-col h-full">
-//       <div className="bg-red-300 rounded-tr-lg h-full max-h-75-screen overflow-scroll  p-6 space-y-3 flex flex-col scrollbar-thin scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700 scrollbar-track-transparent hover:scrollbar-track-gray-200 overflow-y-scroll scrollbar-thumb-rounded-full">
-//         <SenderChat />
-//         <SenderChat />
-//       </div>
-//       <div className="flex p-3">
-//         <input
-//           className="bg-gray-200 py-5 px-6 rounded-l-full w-full focus:outline-none"
-//           placeholder="Enter"
-//         />
-//         <div className="bg-gray-300 rounded-r-full py-3 px-6 flex justify-center items-center">
-//           <PaperAirplaneIcon className="w-9 h-9 text-white rotate-90" />
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
 
 export { ChatListCard, ActiveChatCard };

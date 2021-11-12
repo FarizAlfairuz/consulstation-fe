@@ -5,7 +5,7 @@ import Layout from "components/Layout";
 // import useConsultant from "hooks/consultant/useConsultant";
 import ConsultantAPI from "api/ConsultantAPI";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const cons = await ConsultantAPI.getConsultants().then(
     (res) => res.data.data
   );
@@ -47,7 +47,7 @@ function ConsultantsPage(props) {
             <ConsultantCard key={index} id={consultant._id} username={consultant.username} />
           ))} */}
         {cons.map((c, index) => (
-          <ConsultantCard key={index} id={c._id} username={c.username} />
+          <ConsultantCard key={index} id={c._id} year={c.startingYear} photo={c.profilePicture.url} firstName={c.firstName} lastName={c.lastName} />
         ))}
       </div>
     </Layout>
