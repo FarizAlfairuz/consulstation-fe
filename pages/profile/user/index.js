@@ -13,6 +13,7 @@ import PhotoForm from "components/Forms/PhotoForm";
 import Cookie from "js-cookie";
 import usePartnership from "hooks/user/usePartnership";
 import PlanForm from "components/Forms/PlanForm";
+import Swal from "sweetalert2";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -36,8 +37,8 @@ function UserProfilePage() {
   const [isCreating, setIsCreating] = useState(false);
   const [upload, setUpload] = useState(null);
 
-  const { plans } = usePartnership("profile");
-  console.log(plans);
+  const { plans } = usePartnership("profile", role);
+  // console.log(plans);
 
   const {
     register,
@@ -213,7 +214,10 @@ function UserProfilePage() {
             )}
             {plans.data.data &&
               plans.data.data.map((plan, index) => (
-                <div key={index} className="bg-platinum space-y-2 p-5 rounded-lg">
+                <div
+                  key={index}
+                  className="bg-platinum space-y-2 p-5 rounded-lg"
+                >
                   <div>{plan.title}</div>
                   <div className="flex justify-between text-paragraph-heading font-bold space-x-4">
                     <h4 className="truncate">{plan.description}</h4>

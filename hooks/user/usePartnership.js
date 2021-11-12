@@ -2,8 +2,9 @@ import PartnershipAPI from "api/PartnershipAPI";
 import useAPI from "hooks/useAPI";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
+import Swal from "sweetalert2";
 
-function usePartnership(page) {
+function usePartnership(page, role) {
   const [state, dispatch] = useAPI();
   const [planState, dispatchPlan] = useAPI();
   const [plans, dispatchPlans] = useAPI();
@@ -27,6 +28,13 @@ function usePartnership(page) {
       })
       .catch(() => {
         dispatch({ type: "FETCH_FAILED" });
+        Swal.fire({
+          icon: "error",
+          title: "Gagal mendaftar!",
+          text: "Nomor telepon tidak boleh kosong",
+        }).then(() => {
+          router.replace("/profile/user");
+        })
       });
   };
 
@@ -55,7 +63,7 @@ function usePartnership(page) {
       });
   }, [dispatchPlans])
 
-  if (page === "profile") {
+  if (page === "profile" && role === "consultant") {
     useEffect(() => {
       getPlans()
       return () => {

@@ -6,6 +6,10 @@ const ArticleAPI = {
     return API.get("/articles");
   },
 
+  getById(id) {
+    return API.get(`/article/${id}`)
+  },
+
   createArticle(data) {
     return API.post("/article", data, {
       headers: { Authorization: "Bearer " + Cookie.get("token") },

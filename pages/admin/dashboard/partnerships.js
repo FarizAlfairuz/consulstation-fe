@@ -5,7 +5,7 @@ function partnerships() {
   const { state, acc, accPartership } = usePartnerships();
 
   // console.log(state);
-  console.log(acc)
+  // console.log(acc)
 
   return (
     <div className="space-y-3">

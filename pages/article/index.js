@@ -1,7 +1,24 @@
+import ArticleAPI from "api/ArticleAPI";
 import Button from "components/Button";
+import ArticleCard from "components/Cards/ArticleCard";
 import Layout from "components/Layout";
 
-function ArticlePage() {
+export const getServerSideProps = async () => {
+  const articles = await ArticleAPI.getArticle().then((res) => res.data.data);
+
+  return {
+    props: {
+      articles: articles,
+    },
+  };
+};
+
+function ArticlePage(props) {
+  const { articles } = props;
+
+  console.log(articles);
+
+
   return (
     <Layout>
       <div className="max-w-3xl flex flex-col space-y-4">
@@ -22,21 +39,9 @@ function ArticlePage() {
       </div>
 
       <div className="flex space-x-5">
-        <div className="bg-floralWhite rounded-lg p-4 space-y-4">
-          <h4 className="text-paragraph-heading font-bold">
-            How to Money Management
-          </h4>
-          <div className="flex justify-between">
-              <div className="space-y-2">
-                  <p className="text-xs">Publish Date</p>
-                  <h6 className="text-paragraph-2 font-bold">September, 24 2021</h6>
-              </div>
-              <div className="space-y-2">
-                  <p className="text-xs">Writer</p>
-                  <h6 className="text-paragraph-2 font-bold">John Doe</h6>
-              </div>
-          </div>
-        </div>
+        {articles.map((article, index) => (
+          <ArticleCard key={index} details={article} />
+        ))}
       </div>
     </Layout>
   );

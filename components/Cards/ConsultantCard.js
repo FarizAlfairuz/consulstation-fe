@@ -14,7 +14,7 @@ function ConsultantCard(props) {
 
   return (
     <Link href="/consultants/[id]" as={`/consultants/${id}`} >
-      <div className="bg-gray-200 p-6 rounded-lg space-y-2 transition ease-out duration-500 hover:cursor-pointer flex flex-col justify-between">
+      <div className="bg-white p-6 rounded-lg space-y-2 transition ease-out duration-500 hover:cursor-pointer flex flex-col justify-between">
         <div className="space-y-2">
           <img
             className="h-14 w-14 rounded-full"

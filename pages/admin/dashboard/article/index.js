@@ -5,7 +5,7 @@ import Link from "next/link";
 
 function ArticleAdminPage() {
   const { state } = useArticle();
-  console.log(state);
+  // console.log(state);
 
   return (
     <div className="space-y-4">
@@ -33,7 +33,7 @@ function ArticleAdminPage() {
         </div> */}
         {state.data.data &&
           state.data.data.map((details, index) => (
-            <ArticleCard key={index} details={details} />
+            <ArticleCard key={index} details={details} color="bg-floralWhite" />
           ))}
       </div>
     </div>

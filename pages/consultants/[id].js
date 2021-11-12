@@ -69,7 +69,7 @@ function ConsPublicProfilePage(props) {
               <h4 className="text-heading-3 font-bold">
                 {profile.firstName + " " + profile.lastName}
               </h4>
-              <h5 className="text-paragraph-heading ">Personal Account</h5>
+              <h5 className="text-paragraph-heading ">Bussiness Consultant</h5>
               <h5 className="text-paragraph-heading ">{work} years</h5>
             </div>
           </div>

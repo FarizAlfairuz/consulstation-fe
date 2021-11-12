@@ -13,18 +13,19 @@ function useProfile(role) {
   const [username, setUsername] = usePersistentState("username", null);
 
   const getProfile = useCallback(() => {
+    // console.log(role)
     dispatch({ type: "REQUEST" });
     if (role === "user") {
       ProfileAPI.getUserProfile()
         .then((res) => {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
           setUsername(res.data.data.username);
-          console.log(res)
+          // console.log(res)
         })
         .catch(() => {
           dispatch({ type: "FETCH_FAILED" });
         });
-    } else {
+    } else if (role === "consultant") {
       ConsultantAPI.getConsProfile()
         .then((res) => {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });

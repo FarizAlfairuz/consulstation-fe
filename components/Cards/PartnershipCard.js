@@ -3,7 +3,7 @@ import Button from "components/Button";
 function PartnershipCard(props) {
   const { req, accept, loading } = props;
   return (
-    <div className="flex justify-between items-center bg-platinum p-3 rounded-lg">
+    <div className="flex justify-between items-center bg-platinum p-3 rounded-lg ">
       <div className="flex space-x-4">
         <div>
           <div className="flex space-x-2 font-bold text-lg">
