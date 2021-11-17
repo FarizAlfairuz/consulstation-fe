@@ -9,6 +9,7 @@ const useUsername = createPersistedState("username");
 
 function useRegister() {
   const [state, dispatch] = useAPI();
+  const router = useRouter();
 
   const registerSubmit = (data) => {
     dispatch({ type: "REQUEST" });
@@ -16,6 +17,12 @@ function useRegister() {
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
         // console.log(res)
+        Swal.fire({
+          icon: "success",
+          title: "Akun berhasil terdaftar",
+        }).then(() => {
+          router.replace("/sign-in");
+        });
       })
       .catch(() => {
         dispatch({ type: "FETCH_FAILED" });
@@ -37,7 +44,6 @@ function useLogin(role) {
     if (role === "user") {
       AuthAPI.login(data)
         .then((res) => {
-          router.replace("/");
           if (res.data.success) {
             dispatch({ type: "FETCH_SUCCESS", payload: res.data });
             Cookie.set("logged", true);

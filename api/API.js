@@ -11,47 +11,47 @@ const API = axios.create({
   baseURL: baseURL
 });
 
-API.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      console.log("unauthorized");
-      // API.post("/token", {refreshToken})
-      // .then((res) => {
-      //   Cookie.set("refreshToken", res.data.refreshToken)
-      //   Cookie.set("token", res.data.accessToken)
-      // })
-      // .catch(() => {
-      //   console.log("Something wrong!");
-      // });
+// API.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     if (error.response && error.response.status === 401) {
+//       console.log("unauthorized");
+//       // API.post("/token", {refreshToken})
+//       // .then((res) => {
+//       //   Cookie.set("refreshToken", res.data.refreshToken)
+//       //   Cookie.set("token", res.data.accessToken)
+//       // })
+//       // .catch(() => {
+//       //   console.log("Something wrong!");
+//       // });
 
-      return Promise.reject();
-    }
-    if (error.response && error.response.status === 403) {
-      console.log("forbidden");
-      // API.post("/token", { refreshToken })
-      //   .then((res) => {
-      //     console.log(res)
-      //     Cookie.set("refreshToken", res.data.refreshToken);
-      //     Cookie.set("token", res.data.accessToken);
-      //   })
-      //   .catch(() => {
-      //     console.log("Something wrong!");
-      //   });
+//       return Promise.reject();
+//     }
+//     if (error.response && error.response.status === 403) {
+//       console.log("forbidden");
+//       // API.post("/token", { refreshToken })
+//       //   .then((res) => {
+//       //     console.log(res)
+//       //     Cookie.set("refreshToken", res.data.refreshToken);
+//       //     Cookie.set("token", res.data.accessToken);
+//       //   })
+//       //   .catch(() => {
+//       //     console.log("Something wrong!");
+//       //   });
 
-      return Promise.reject();
-    }
+//       return Promise.reject();
+//     }
 
-    return Promise.reject(error);
-  }
-);
+//     return Promise.reject(error);
+//   }
+// );
 
-API.interceptors.request.use((req) => {
-  // token = Cookie.get("token")
-  // console.log(token)
-  // console.log(`${req.method} ${req.url}`);
+// API.interceptors.request.use((req) => {
+//   // token = Cookie.get("token")
+//   // console.log(token)
+//   // console.log(`${req.method} ${req.url}`);
 
-  return req;
-});
+//   return req;
+// });
 
 export default API;

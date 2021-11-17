@@ -1,10 +1,10 @@
+import Link from "next/link"
+
 function Container(props) {
   const { children, bgColor } = props;
   return (
     <div className={`w-full py-20 ${bgColor}`}>
-      <div className="w-4/5 mx-auto">
-        {children}
-      </div>
+      <div className="w-4/5 mx-auto">{children}</div>
     </div>
   );
 }
@@ -18,10 +18,12 @@ export default Container;
 export const HeroCard = (props) => {
   const { title, image } = props;
   return (
-    <div className="w-28 h-40 bg-white rounded-xl p-3 flex flex-col justify-start items-center space-y-3 hover:cursor-pointer">
-      <img className="h-16 w-16 rounded-full" src={image} alt="magnifying" />
-      <p className="font-nunito text-sm text-center">{title}</p>
-    </div>
+    <Link href="/consultants">
+      <a className="w-28 h-40 bg-white rounded-xl p-3 flex flex-col justify-start items-center space-y-3 hover:cursor-pointer">
+        <img className="h-16 w-16 rounded-full" src={image} alt="magnifying" />
+        <p className="font-nunito text-sm text-center">{title}</p>
+      </a>
+    </Link>
   );
 };
 

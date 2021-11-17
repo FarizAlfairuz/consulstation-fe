@@ -17,18 +17,15 @@ export default function Home() {
             </h4>
 
             <div className="flex space-x-4 ">
-              <Link href="/consultants">
-                <HeroCard
-                  image="https://static.vecteezy.com/system/resources/previews/000/424/228/original/magnifying-glass-icon-vector-illustration.jpg"
-                  title="Search Consultants"
-                />
-              </Link>
-              <Link href="/consultants">
-                <HeroCard
-                  image="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.YLoPkmH3xnwH8Q3czgK5dAHaHa%26pid%3DApi&f=1"
-                  title="Chatting with Consultants"
-                />
-              </Link>
+              <HeroCard
+                image="https://static.vecteezy.com/system/resources/previews/000/424/228/original/magnifying-glass-icon-vector-illustration.jpg"
+                title="Search Consultants"
+              />
+
+              <HeroCard
+                image="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.YLoPkmH3xnwH8Q3czgK5dAHaHa%26pid%3DApi&f=1"
+                title="Chatting with Consultants"
+              />
             </div>
           </div>
           <div className="hidden lg:flex items-end lg:w-full">
