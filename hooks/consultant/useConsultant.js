@@ -16,8 +16,6 @@ function useConsultant() {
       .catch(() => {
         dispatch({ type: "FETCH_FAILED" });
       });
-
-    return state
   }
 
   const getPublicProfile = (id) => {
@@ -32,7 +30,17 @@ function useConsultant() {
       });
   }
 
-  
+  const searchConsultant = (query) => {
+    dispatch({ type: "REQUEST" });
+
+    ConsultantAPI.searchConsultants(query)
+      .then((res) => {
+        dispatch({ type: "FETCH_SUCCESS", payload: res.data });
+      })
+      .catch(() => {
+        dispatch({ type: "FETCH_FAILED" });
+      });
+  }
 
   // useEffect(() => {
   //   getConsultantsList()
@@ -42,7 +50,7 @@ function useConsultant() {
   //   }
   // }, [getConsultantsList, dispatch])
 
-  return { state, getConsultantsList, getPublicProfile, profile };
+  return { state, getConsultantsList, getPublicProfile, profile, searchConsultant };
 }
 
 export default useConsultant;

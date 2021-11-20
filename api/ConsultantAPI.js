@@ -6,6 +6,10 @@ const ConsultantAPI = {
     return API.get("/consultants");
   },
 
+  searchConsultants(query) {
+    return API.get("/consultants?limit=2&page=0&search=" + query);
+  },
+
   getPublicProfile(id) {
     return API.get(`/consultant/${id}`)
   },

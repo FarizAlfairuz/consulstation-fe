@@ -33,7 +33,11 @@ function useUserChat(page) {
   const router = useRouter();
 
   // const [username] = usePersistentState("username", null);
-  const chats = document.getElementById("chats");
+  
+  let chats
+  if (typeof document !== 'undefined') {
+    chats = window.document.getElementById("chats");
+  }
 
   const scrollToBottom = () => {
     chats.scrollTop = chats.scrollHeight;
