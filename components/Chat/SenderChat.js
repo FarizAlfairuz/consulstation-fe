@@ -5,7 +5,7 @@ function SenderChat(props) {
   const hour = sent.toLocaleTimeString()
 
   return (
-    <div className="flex justify-end items-baseline space-x-3">
+    <div id="chat" className="flex justify-end items-baseline space-x-3">
       <div className="space-y-1">
         <div className="bg-gray-300 p-3 rounded-md text-base font-nunito">
           {chat.message}

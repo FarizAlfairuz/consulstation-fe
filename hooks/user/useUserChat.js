@@ -1,12 +1,17 @@
 import ChatAPI from "api/ChatAPI";
 import useAPI from "hooks/useAPI";
 import createPersistedState from "use-persisted-state";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import usePersistentState from "hooks/usePersistentState";
+import Cookie from "js-cookie"
+import { io } from "socket.io-client";
 
 const selectChat = createPersistedState("selected_chat");
 const selectConsId = createPersistedState("selected_cons_id");
 const selectIsPaid = createPersistedState("is_paid");
+
+const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
 
 function useUserChat(page) {
   const [initiateState, dispatchInitiate] = useAPI();
@@ -17,15 +22,27 @@ function useUserChat(page) {
   const [selectedChat, setSelectedChat] = selectChat("");
   const [selectedId, setSelectedId] = selectConsId("");
   const [isPaid, setIsPaid] = selectIsPaid(true);
-  
+
+  const [messages, setMessages] = useState([]);
+  // const [message, setMessage] = useState({});
+
+  // const socket = io('http://localhost:8000')
+  // console.log(socket)
+  // console.log(baseURL + `/chat/${20}?page=${0}&limit=${30}`)
 
   const router = useRouter();
 
+  // const [username] = usePersistentState("username", null);
+  const chats = document.getElementById("chats");
+
+  const scrollToBottom = () => {
+    chats.scrollTop = chats.scrollHeight;
+  };
 
   const initiateChat = (id) => {
     // console.log(id);
-    setSelectedId(id)
-    
+    setSelectedId(id);
+
     dispatchInitiate({ type: "REQUEST" });
     ChatAPI.initiate(id)
       .then((res) => {
@@ -41,25 +58,38 @@ function useUserChat(page) {
 
   const getChat = useCallback(() => {
     // console.log(id)
+    // console.log("get chat list");
     dispatchChat({ type: "REQUEST" });
     ChatAPI.getChats(selectedChat, 0, 30)
       .then((res) => {
         // console.log(res.data.data);
         dispatchChat({ type: "FETCH_SUCCESS", payload: res.data });
+        setMessages(res.data.data);
+        scrollToBottom();
       })
       .catch(() => {
         dispatchChat({ type: "FETCH_FAILED" });
       });
   }, [dispatchChat]);
 
+  // const addChat = () => {
+  //   console.log(message)
+  //   setMessages([...messages, message])
+  // }
+
   const sendChat = (data) => {
     dispatchSend({ type: "REQUEST" });
-    console.log(data);
+    // console.log("send chat");
     ChatAPI.sendChat(selectedChat, data)
       .then((res) => {
-        // console.log(res.data);
+        // console.log(res.data.data);
         dispatchSend({ type: "FETCH_SUCCESS", payload: res.data });
-        window.location.reload();
+        // getChat()
+        // setMessage(res.data.data);
+        // console.log(message)
+        // addChat()
+        setMessages([res.data.data, ...messages]);
+        scrollToBottom();
       })
       .catch(() => {
         dispatchSend({ type: "FETCH_FAILED" });
@@ -78,22 +108,23 @@ function useUserChat(page) {
       });
   }, [dispatchRoom]);
 
-  const getIsPaid = useCallback((id, isPaid) => {
-    // console.log("function " + isPaid)
-    if (id === selectedId) {
-      // console.log("tes")
-      setIsPaid(isPaid)
-    }
-  }, [setIsPaid])
+  const getIsPaid = useCallback(
+    (id, isPaid) => {
+      if (id === selectedChat) {
+        setIsPaid(isPaid);
+      }
+    },
+    [setIsPaid]
+  );
 
   if (page === "chat") {
     useEffect(() => {
-      getChat(selectedChat);
+      getChat();
 
       return () => {
         dispatchChat({ type: "RESET" });
       };
-    }, [getChat, dispatchChat, selectedChat]);
+    }, [getChat, dispatchChat]);
 
     useEffect(() => {
       getChatroom();
@@ -102,6 +133,17 @@ function useUserChat(page) {
         dispatchRoom({ type: "RESET" });
       };
     }, [getChatroom, dispatchRoom]);
+
+    // useEffect(() => {
+    //   ChatAPI.getChats(selectedChat, 0, 30)
+    //     .then((res) => {
+    //       setMessages(res.data.data);
+    //       console.log(res.data.data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }, [setMessages]);
   }
 
   return {
@@ -116,7 +158,10 @@ function useUserChat(page) {
     roomState,
     getIsPaid,
     setIsPaid,
-    isPaid
+    isPaid,
+    messages,
+    setSelectedChat,
+    selectedId,
   };
 }
 

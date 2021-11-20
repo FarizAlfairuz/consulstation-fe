@@ -16,7 +16,7 @@ export const getServerSideProps = async () => {
 function ArticlePage(props) {
   const { articles } = props;
 
-  console.log(articles);
+  // console.log(articles);
 
 
   return (

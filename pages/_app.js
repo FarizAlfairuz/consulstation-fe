@@ -9,7 +9,7 @@ import API from "api/API";
 
 function MyApp({ Component, pageProps }) {
   const roleCookie = Cookie.get("role");
-  const refreshCookie = Cookie.get("refreshToken")
+  // const refreshCookie = Cookie.get("refreshToken")
   const [role, setRole] = useState("");
   // const [refreshToken, setRefreshToken] = useState("")
 
@@ -40,6 +40,10 @@ function MyApp({ Component, pageProps }) {
             });
     
           return Promise.reject();
+        }
+
+        if (error.response && error.response.status === 401) {
+
         }
     
         return Promise.reject(error);

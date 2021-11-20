@@ -8,33 +8,37 @@ import usePersistentState from "hooks/usePersistentState";
 import Button from "components/Button";
 import useTransaction from "hooks/user/useTransaction";
 
+
+
 function ChatRoom(props) {
-  const { isPaid } = props;
-  // console.log(isPaid)
-  const { chatState, sendChat, selectedChat } = useUserChat("chat");
+  const { isPaid, chats } = props;
+  // console.log(chats)
+  
+
+
+  const { sendChat, selectedChat, messages } = useUserChat("chat");
   const [username] = usePersistentState("username", null);
 
   const { state, createTransaction } = useTransaction();
-  console.log(state);
+  // console.log(messages);
 
   const { register, handleSubmit, reset } = useForm({
     mode: "onTouched",
   });
 
-
   const submit = (data) => {
     sendChat(data);
-    setTimeout(() => {
-      reset();
-    }, 500);
+    reset();
   };
 
-  return isPaid === "false" ? (
+  // console.log(isPaid)
+
+
+  return isPaid === false ? (
     <div className="relative bg-white rounded-tr-lg rounded-br-lg flex flex-col h-full">
       {/* <div className="bg-platinum py-2 px-4">hehe</div> */}
-      <div className="bg-white rounded-tr-lg h-full max-h-75-screen overflow-scroll  p-6 space-y-3 flex flex-col-reverse scrollbar-thin scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700 scrollbar-track-transparent hover:scrollbar-track-gray-200 overflow-y-scroll scrollbar-thumb-rounded-full">
-        {chatState.data.data &&
-          chatState.data.data.map((chat, index) =>
+      <div id="chats" className="bg-white rounded-tr-lg h-full max-h-75-screen overflow-scroll  p-6 space-y-3 flex flex-col scrollbar-thin scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700 scrollbar-track-transparent hover:scrollbar-track-gray-200 overflow-y-scroll scrollbar-thumb-rounded-full">
+        {messages && messages.slice(0).reverse().map((chat, index) =>
             chat.sender.username === username ? (
               <SenderChat key={index} chat={chat} />
             ) : (

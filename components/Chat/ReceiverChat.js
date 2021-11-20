@@ -4,7 +4,7 @@ function ReceiverChat(props) {
   const hour = sent.toLocaleTimeString()
 
   return (
-    <div className="flex justify-start items-baseline space-x-3">
+    <div id="chat" className="flex justify-start items-baseline space-x-3">
       <img
         className="h-6 w-6 rounded-full"
         src={chat.receiver.profilePicture.url}

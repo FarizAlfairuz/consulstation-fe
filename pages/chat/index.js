@@ -4,15 +4,16 @@ import Layout from "components/Layout";
 import useUserChat from "hooks/user/useUserChat";
 import Button from "components/Button";
 import useTransaction from "hooks/user/useTransaction";
+import withAuth from "HOC/user/withAuth";
+import Cookie from "js-cookie";
 
 function ChatPage() {
   const ChatRoom = dynamic(() => import("components/Chat/ChatRoom"));
 
-  const { initiateChat, selectedChat, roomState, isPaid } = useUserChat("chat");
+  const { initiateChat, selectedChat, roomState, isPaid, setSelectedChat } =
+    useUserChat("chat");
   // console.log(roomState.data.data);
   // console.log(isPaid)
-
-  
 
   return (
     <Layout>
@@ -31,11 +32,14 @@ function ChatPage() {
               roomState.data.data.map((cons, index) => (
                 <ChatListCard
                   key={index}
-                  consultantId={cons.consultantId}
+                  id={cons._id}
+                  selectedChat={selectedChat}
                   name={cons.otherUser.username}
                   picture={cons.otherUser.profilePicture.url}
                   isPaid={cons.isPaid}
-                  onClick={() => initiateChat(cons.consultantId)}
+                  onClick={() => {
+                    setSelectedChat(cons._id);
+                  }}
                 />
               ))}
           </div>
@@ -45,25 +49,10 @@ function ChatPage() {
 
         <div className="col-span-1 md:col-span-2 bg-gray-300 rounded-tr-lg rounded-br-lg p-6">
           <ChatRoom isPaid={isPaid} />
-          {/* {isPaid ? (
-          ) : (
-            <div className="relative h-full flex flex-col space-y-8 justify-center items-center bg-white rounded-tr-lg rounded-br-lg">
-              <div>
-                Please continue to payment to start a chat with this consultant
-              </div>
-              <Button
-                color="bg-orangeWeb"
-                onClick={() => createTransaction(selectedChat)}
-                disabled={state.disabled}
-              >
-                Continue to Payment
-              </Button>
-            </div>
-          )} */}
         </div>
       </div>
     </Layout>
   );
 }
 
-export default ChatPage;
+export default withAuth(ChatPage);

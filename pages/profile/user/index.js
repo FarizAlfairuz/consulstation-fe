@@ -38,7 +38,7 @@ function UserProfilePage() {
   const [upload, setUpload] = useState(null);
 
   const { plans } = usePartnership("profile", role);
-  // console.log(plans);
+  console.log(state);
 
   const {
     register,
@@ -176,6 +176,7 @@ function UserProfilePage() {
                 Are you a bussines consultant? Register now!
               </p>
             </div>
+            {state.data.data && state.data.data.partnershipRequest === "pending" ? (
             <div>
               <Button
                 color="bg-white"
@@ -187,6 +188,9 @@ function UserProfilePage() {
                 </Link>
               </Button>
             </div>
+            ) : (
+              <div>Sedang menunggu persetujuan</div>
+            )}
           </div>
         ) : (
           <div className="flex flex-col space-y-3 bg-white p-6 rounded-lg">

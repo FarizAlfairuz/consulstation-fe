@@ -3,25 +3,19 @@ import { useEffect } from "react";
 
 
 function ChatListCard(props) {
-  const { name, picture, onClick, isPaid, consultantId } = props;
+  const { name, picture, onClick, isPaid, id, selectedChat } = props;
 
   const { getIsPaid } = useUserChat();
   
-  // console.log(consultantId)
-  // console.log("chatcard " + isPaid)
   useEffect(() => {
-    getIsPaid(consultantId, isPaid)
-
-    // return () => {
-    //   setIsPaid(true)
-    // }
-  },[consultantId])
+    getIsPaid(id, isPaid)
+  },[id])
 
 
   return (
     <div
       onClick={onClick}
-      className="flex items-center space-x-3 bg-gray-300 rounded-lg p-5"
+      className={`flex items-center space-x-3 ${id === selectedChat ? `bg-goldCrayola` : `bg-gray-300` } rounded-lg p-5`}
     >
       <img className="h-14 w-14 rounded-full" src={picture} alt="Consultant" />
       <div>

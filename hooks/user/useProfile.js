@@ -3,6 +3,7 @@ import ProfileAPI from "api/ProfileAPI";
 import useAPI from "hooks/useAPI";
 import usePersistentState from "hooks/usePersistentState";
 import ConsultantAPI from "api/ConsultantAPI";
+import Cookie from "js-cookie"
 
 function useProfile(role) {
   const [state, dispatch] = useAPI();
@@ -20,7 +21,8 @@ function useProfile(role) {
         .then((res) => {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
           setUsername(res.data.data.username);
-          // console.log(res)
+          // console.log(res.data.data)
+          Cookie.set("role", res.data.data.role)
         })
         .catch(() => {
           dispatch({ type: "FETCH_FAILED" });

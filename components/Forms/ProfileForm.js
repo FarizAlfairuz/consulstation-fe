@@ -8,7 +8,7 @@ function ProfileForm(props) {
         <input
           type={type}
           name={name}
-          disabled={name === "email" ? !disabled : disabled}
+          disabled={name === "email" ? true : disabled}
           placeholder={label}
           className="font-nunito text-paragraph-heading w-full bg-transparent truncate border-b-2 border-black disabled:border-none font-bold text-black focus:outline-none"
           {...register(name, { ...required })}
