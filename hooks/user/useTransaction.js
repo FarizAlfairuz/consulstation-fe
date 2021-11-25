@@ -10,6 +10,7 @@ function useTransaction() {
     TransactionAPI.createTransaction(data)
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
+        console.log(res)
       })
       .catch(() => {
         dispatch({ type: "FETCH_FAILED" });
