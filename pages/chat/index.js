@@ -39,6 +39,7 @@ function ChatPage() {
                   isPaid={cons.isPaid}
                   onClick={() => {
                     setSelectedChat(cons._id);
+                    window.location.reload();
                   }}
                 />
               ))}
