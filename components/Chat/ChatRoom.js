@@ -34,7 +34,7 @@ function ChatRoom(props) {
   console.log(isPaid)
 
 
-  return isPaid === false ? (
+  return isPaid === true ? (
     <div className="relative bg-white rounded-tr-lg rounded-br-lg flex flex-col h-full">
       {/* <div className="bg-platinum py-2 px-4">hehe</div> */}
       <div id="chats" className="bg-white rounded-tr-lg h-full max-h-75-screen overflow-scroll  p-6 space-y-3 flex flex-col scrollbar-thin scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700 scrollbar-track-transparent hover:scrollbar-track-gray-200 overflow-y-scroll scrollbar-thumb-rounded-full">
