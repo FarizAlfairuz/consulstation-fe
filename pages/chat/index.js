@@ -10,7 +10,7 @@ import Cookie from "js-cookie";
 function ChatPage() {
   const ChatRoom = dynamic(() => import("components/Chat/ChatRoom"));
 
-  const { selectedChat, roomState, isPaid, changeChat } =
+  const { selectedChat, roomState, isPaid, changeChat, setIsPaid } =
     useUserChat("chat");
   // console.log(roomState.data.data);
   // console.log(isPaid)
@@ -40,6 +40,7 @@ function ChatPage() {
                   isPaid={cons.isPaid}
                   onClick={() => {
                     changeChat(cons._id)
+                    setIsPaid(cons.isPaid)
                   }}
                 />
               ))}

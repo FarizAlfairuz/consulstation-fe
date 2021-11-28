@@ -118,7 +118,7 @@ function useUserChat(page) {
         // console.log(id + " " + selectedChat);
         // console.log(paid);
         setIsPaid(paid);
-        window.location.reload();
+        // window.location.reload();
       }
     },
     [setIsPaid]
@@ -175,6 +175,7 @@ function useUserChat(page) {
     setSelectedChat,
     selectedId,
     changeChat,
+    setIsPaid
   };
 }
 
