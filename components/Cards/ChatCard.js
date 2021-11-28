@@ -9,7 +9,7 @@ function ChatListCard(props) {
   
   useEffect(() => {
     getIsPaid(id, isPaid)
-  },[id, isPaid, getIsPaid])
+  },[isPaid])
 
 
   return (
