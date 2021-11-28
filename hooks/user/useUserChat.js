@@ -121,6 +121,11 @@ function useUserChat(page) {
     [setIsPaid]
   );
 
+  const changeChat = (id) => {
+    setSelectedChat(id)
+    window.location.reload();
+  }
+
   if (page === "chat") {
     useEffect(() => {
       getChat();
@@ -166,6 +171,7 @@ function useUserChat(page) {
     messages,
     setSelectedChat,
     selectedId,
+    changeChat
   };
 }
 
