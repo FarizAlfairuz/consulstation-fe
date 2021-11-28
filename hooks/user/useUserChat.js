@@ -4,7 +4,7 @@ import createPersistedState from "use-persisted-state";
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import usePersistentState from "hooks/usePersistentState";
-import Cookie from "js-cookie"
+import Cookie from "js-cookie";
 import { io } from "socket.io-client";
 
 const selectChat = createPersistedState("selected_chat");
@@ -33,9 +33,9 @@ function useUserChat(page) {
   const router = useRouter();
 
   // const [username] = usePersistentState("username", null);
-  
-  let chats
-  if (typeof document !== 'undefined') {
+
+  let chats;
+  if (typeof document !== "undefined") {
     chats = window.document.getElementById("chats");
   }
 
@@ -115,18 +115,19 @@ function useUserChat(page) {
   const getIsPaid = useCallback(
     (id, paid) => {
       if (id === selectedChat) {
-        console.log(id + " " + selectedChat)
-        console.log(paid)
+        // console.log(id + " " + selectedChat);
+        // console.log(paid);
         setIsPaid(paid);
+        window.location.reload();
       }
     },
     [setIsPaid]
   );
 
   const changeChat = (id) => {
-    setSelectedChat(id)
+    setSelectedChat(id);
     window.location.reload();
-  }
+  };
 
   if (page === "chat") {
     useEffect(() => {
@@ -173,7 +174,7 @@ function useUserChat(page) {
     messages,
     setSelectedChat,
     selectedId,
-    changeChat
+    changeChat,
   };
 }
 
