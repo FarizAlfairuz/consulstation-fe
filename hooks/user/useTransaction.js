@@ -11,6 +11,7 @@ function useTransaction() {
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
         console.log(res)
+        window.open(res.data.data.redirect_url, '_blank')
       })
       .catch(() => {
         dispatch({ type: "FETCH_FAILED" });
