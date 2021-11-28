@@ -113,9 +113,11 @@ function useUserChat(page) {
   }, [dispatchRoom]);
 
   const getIsPaid = useCallback(
-    (id, isPaid) => {
+    (id, paid) => {
       if (id === selectedChat) {
-        setIsPaid(isPaid);
+        console.log(id + " " + selectedChat)
+        console.log(paid)
+        setIsPaid(paid);
       }
     },
     [setIsPaid]

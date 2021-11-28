@@ -31,7 +31,7 @@ function ChatRoom(props) {
     reset();
   };
 
-  console.log(isPaid)
+  // console.log(isPaid)
 
 
   return isPaid === true ? (
