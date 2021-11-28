@@ -34,7 +34,8 @@ function ChatPage() {
                   key={index}
                   id={cons._id}
                   selectedChat={selectedChat}
-                  name={cons.otherUser.username}
+                  firstName={cons.otherUser.firstName}
+                  lastName={cons.otherUser.lastName}
                   picture={cons.otherUser.profilePicture.url}
                   isPaid={cons.isPaid}
                   onClick={() => {

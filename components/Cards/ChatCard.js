@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 
 function ChatListCard(props) {
-  const { name, picture, onClick, isPaid, id, selectedChat } = props;
+  const { firstName, lastName, picture, onClick, isPaid, id, selectedChat } = props;
 
   const { getIsPaid } = useUserChat();
   
@@ -19,7 +19,7 @@ function ChatListCard(props) {
     >
       <img className="h-14 w-14 rounded-full" src={picture} alt="Consultant" />
       <div>
-        <h6 className="text-paragraph-1 font-bold">{name}</h6>
+        <h6 className="text-paragraph-1 font-bold">{firstName + " " + lastName}</h6>
         <h6 className="text-paragraph-1">Available</h6>
         {/* <h6 className="text-paragraph-1">{id}</h6> */}
       </div>
