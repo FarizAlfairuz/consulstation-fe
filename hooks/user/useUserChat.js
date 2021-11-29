@@ -126,7 +126,7 @@ function useUserChat(page) {
 
   const changeChat = (id) => {
     setSelectedChat(id);
-    window.location.reload();
+    // window.location.reload();
   };
 
   if (page === "chat") {
