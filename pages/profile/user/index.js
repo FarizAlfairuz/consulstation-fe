@@ -176,7 +176,7 @@ function UserProfilePage() {
                 Are you a bussines consultant? Register now!
               </p>
             </div>
-            {state.data.data && state.data.data.partnershipRequest === "pending" ? (
+            {state.data.data && state.data.data.partnershipRequest === "none" ? (
             <div>
               <Button
                 color="bg-white"
