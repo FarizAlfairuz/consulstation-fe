@@ -14,6 +14,7 @@ import Cookie from "js-cookie";
 import usePartnership from "hooks/user/usePartnership";
 import PlanForm from "components/Forms/PlanForm";
 import Swal from "sweetalert2";
+import ChangePassForm from "components/Forms/ChangePassForm";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -35,6 +36,7 @@ function UserProfilePage() {
   const { state, editProfile } = useProfile(role);
   const [isEditing, setIsEditing] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+  const [isChange, setIsChange] = useState(false);
   const [upload, setUpload] = useState(null);
 
   const { plans } = usePartnership("profile", role);
@@ -155,27 +157,31 @@ function UserProfilePage() {
           </form>
           <PhotoForm setUpload={setUpload} />
         </div>
-        
+
         {/* Edit Password */}
         <div className="flex flex-col space-y-3 bg-white p-6 rounded-lg">
-          <div className="flex justify-between items-center ">
-            <div className="space-y-1">
-              <p className="font-nunito text-base">Change Password</p>
-              <p className="font-nunito text-base font-bold">
-                Change your password
-              </p>
+          {isChange ? (
+            <ChangePassForm cancel={() => setIsChange(false)} />
+          ) : (
+            <div className="flex justify-between items-center ">
+              <div className="space-y-1">
+                <p className="font-nunito text-base">Change Password</p>
+                <p className="font-nunito text-base font-bold">
+                  You may need to logging again
+                </p>
+              </div>
+              <div>
+                <Button
+                  color="bg-white"
+                  textColor="text-black"
+                  border="border border-black"
+                  onClick={() => setIsChange(true)}
+                >
+                  Change
+                </Button>
+              </div>
             </div>
-            <div>
-              <Button
-                color="bg-white"
-                textColor="text-black"
-                border="border border-black"
-                onClick={() => setIsCreating(true)}
-              >
-                Change
-              </Button>
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Partnership request / contract plan */}
@@ -207,7 +213,7 @@ function UserProfilePage() {
         ) : (
           <div className="flex flex-col space-y-3 bg-white p-6 rounded-lg">
             {isCreating ? (
-              <PlanForm />
+              <PlanForm cancel={() => setIsCreating(false)} />
             ) : (
               <div className="flex justify-between items-center ">
                 <div className="space-y-1">

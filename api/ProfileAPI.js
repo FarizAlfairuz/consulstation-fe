@@ -57,6 +57,20 @@ const ProfileAPI = {
       withCredentials: true,
     });
   },
+
+  changePassUser(data) {
+    return API.post("/user/password/update", data, {
+      headers: { Authorization: "Bearer " + Cookie.get("token") },
+      withCredentials: true,
+    });
+  },
+  
+  changePassCons(data) {
+    return API.post("/consultant/password/update", data, {
+      headers: { Authorization: "Bearer " + Cookie.get("token") },
+      withCredentials: true,
+    });
+  },
 };
 
 export default ProfileAPI;

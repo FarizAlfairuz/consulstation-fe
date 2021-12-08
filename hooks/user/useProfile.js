@@ -10,6 +10,7 @@ function useProfile(role) {
   const [editState, dispatchEdit] = useAPI();
   const [photoState, dispatchPhoto] = useAPI();
   const [deleteState, dispatchDelete] = useAPI();
+  const [passState, dispatchPass] = useAPI();
   const [isEditing, setIsEditing] = useState(false);
   const [username, setUsername] = usePersistentState("username", null);
 
@@ -119,8 +120,25 @@ function useProfile(role) {
     }
   };
 
-  const changePassword = () => {
-    
+  const changePassword = (data) => {
+    dispatchPass({ type: "REQUEST" });
+    if(role === "user") {
+      ProfileAPI.changePassUser(data)
+        .then((response) => {
+          dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
+        })
+        .catch(() => {
+          dispatchPass({ type: "FETCH_FAILED" });
+        });
+    } else {
+      ProfileAPI.changePassCons(data)
+        .then((response) => {
+          dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
+        })
+        .catch(() => {
+          dispatchPass({ type: "FETCH_FAILED" });
+        });
+    }
   }
 
   useEffect(() => {
@@ -143,6 +161,7 @@ function useProfile(role) {
     deleteState,
     isEditing,
     setIsEditing,
+    changePassword
   };
 }
 

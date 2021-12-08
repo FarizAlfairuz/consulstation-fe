@@ -4,14 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import usePartnership from "hooks/user/usePartnership";
 
-
 const schema = yup.object().shape({
   title: yup.string().required(),
   description: yup.string().required(),
   price: yup.string().required(),
 });
 
-function PlanForm() {
+function PlanForm(props) {
+  const { cancel } = props
   const {
     register,
     handleSubmit,
@@ -21,10 +21,13 @@ function PlanForm() {
     mode: "onTouched",
   });
 
-  const { createPlan } = usePartnership()
+  const { createPlan } = usePartnership();
 
   return (
-    <form onSubmit={handleSubmit(createPlan)} className="flex flex-col w-2/3 space-y-2">
+    <form
+      onSubmit={handleSubmit(createPlan)}
+      className="flex flex-col w-2/3 space-y-2"
+    >
       <div>New Plan</div>
       <input
         type="text"
@@ -74,8 +77,17 @@ function PlanForm() {
           </p>
         )}
       </div>
-      <div className="flex justify-end">
-        <Button type="submit" >Submit</Button>
+      <div className="flex justify-end space-x-4">
+        <Button
+          type="submit"
+          textColor="text-black"
+          color="bg-white"
+          border="border border-black"
+          onClick={cancel}
+        >
+          Cancel
+        </Button>
+        <Button type="submit">Submit</Button>
       </div>
     </form>
   );
