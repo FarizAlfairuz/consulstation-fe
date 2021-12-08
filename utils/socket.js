@@ -2,19 +2,25 @@ import { createContext, useContext } from "react";
 import { io } from "socket.io-client";
 
 const URL = process.env.BASE_URL
+const socket = io(URL, { autoConnect: false })
 
 const SocketContext = createContext({})
 
-function SocketProvider(props) {
+function SocketProvider({children}) {
     return (
-        <SocketContext.Provider value={{}}>
-            { ...props }
+        <SocketContext.Provider value={{
+            socket
+        }}>
+            { children }
         </SocketContext.Provider>
     )
 }
 
-export const useSocket = () => {
-  useContext(SocketContext)
+const useSockets = () => {
+  const context = useContext(SocketContext)
+  console.log(context)
+
+  return context
 }
 
-export default SocketProvider
+export { SocketProvider, useSockets }

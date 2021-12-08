@@ -4,6 +4,8 @@ import Cookie from "js-cookie";
 import { useRouter } from "next/dist/client/router";
 import createPersistedState from "use-persisted-state";
 import Swal from "sweetalert2";
+import { useSockets } from "utils/socket";
+import useSocket from "hooks/useSocket";
 
 const useUsername = createPersistedState("username");
 
@@ -35,11 +37,12 @@ function useRegister() {
 function useLogin(role) {
   const router = useRouter();
   const [state, dispatch] = useAPI();
-  // const [username, setUsername] = usePersistentState("username", null);
   const [username, setUsername] = useUsername("");
 
+  const socket = useSocket()
+
   const loginSubmit = (data) => {
-    // console.log(data)
+    
     dispatch({ type: "REQUEST" });
     if (role === "user") {
       AuthAPI.login(data)
@@ -50,9 +53,13 @@ function useLogin(role) {
             Cookie.set("role", res.data.data.role);
             Cookie.set("token", res.data.data.token);
             Cookie.set("refreshToken", res.data.data.refreshToken);
-            // console.log(res)
+            
             setUsername(data.username);
-            router.replace("/");
+
+            socket.auth = { username: data.username }
+            socket.connect()
+            console.log(socket)
+            // router.replace("/");
           } else {
             Swal.fire({
               icon: "error",
