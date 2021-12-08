@@ -155,19 +155,30 @@ function UserProfilePage() {
           </form>
           <PhotoForm setUpload={setUpload} />
         </div>
-        {/* <div className="flex justify-between items-center bg-gray-300 p-6 rounded-lg">
-          <div className="space-y-1">
-            <p className="font-nunito text-base">Change Password</p>
-            <p className="font-nunito text-base font-bold">
-              Changing your password will make you have to logging again
-            </p>
+        
+        {/* Edit Password */}
+        <div className="flex flex-col space-y-3 bg-white p-6 rounded-lg">
+          <div className="flex justify-between items-center ">
+            <div className="space-y-1">
+              <p className="font-nunito text-base">Change Password</p>
+              <p className="font-nunito text-base font-bold">
+                Change your password
+              </p>
+            </div>
+            <div>
+              <Button
+                color="bg-white"
+                textColor="text-black"
+                border="border border-black"
+                onClick={() => setIsCreating(true)}
+              >
+                Change
+              </Button>
+            </div>
           </div>
-          <div>
-            <Button color="bg-white" textColor="text-black">
-              Change
-            </Button>
-          </div>
-        </div> */}
+        </div>
+
+        {/* Partnership request / contract plan */}
         {role === "user" ? (
           <div className="flex justify-between items-center bg-white p-6 rounded-lg">
             <div className="space-y-1">
@@ -176,18 +187,19 @@ function UserProfilePage() {
                 Are you a bussines consultant? Register now!
               </p>
             </div>
-            {state.data.data && state.data.data.partnershipRequest === "none" ? (
-            <div>
-              <Button
-                color="bg-white"
-                textColor="text-black"
-                border="border border-black"
-              >
-                <Link href="/contract/registration">
-                  <a>Register</a>
-                </Link>
-              </Button>
-            </div>
+            {state.data.data &&
+            state.data.data.partnershipRequest === "none" ? (
+              <div>
+                <Button
+                  color="bg-white"
+                  textColor="text-black"
+                  border="border border-black"
+                >
+                  <Link href="/contract/registration">
+                    <a>Register</a>
+                  </Link>
+                </Button>
+              </div>
             ) : (
               <div>Sedang menunggu persetujuan</div>
             )}

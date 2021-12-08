@@ -59,7 +59,7 @@ function useLogin(role) {
             socket.auth = { username: data.username }
             socket.connect()
             console.log(socket)
-            // router.replace("/");
+            router.replace("/");
           } else {
             Swal.fire({
               icon: "error",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const URL = process.env.BASE_URL
+const URL = 'http://localhost:8000'
 
 function useSocket() {
     const [socket, setSocket] = useState(null)

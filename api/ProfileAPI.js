@@ -15,6 +15,13 @@ const ProfileAPI = {
       withCredentials: true,
     });
   },
+  
+  editConsProfile(data) {
+    return API.post("/user/consultant/update", data, {
+      headers: { Authorization: "Bearer " + Cookie.get("token") },
+      withCredentials: true,
+    });
+  },
 
   uploadPhotoProfile(data) {
     return API.post("/user/avatar", data, {
@@ -23,8 +30,22 @@ const ProfileAPI = {
     });
   },
 
+  uploadConsProfile(data) {
+    return API.post("/consultant/avatar", data, {
+      headers: { Authorization: "Bearer " + Cookie.get("token") },
+      withCredentials: true,
+    });
+  },
+
   deletePhotoProfile(data) {
     return API.delete("/user/avatar", data, {
+      headers: { Authorization: "Bearer " + Cookie.get("token") },
+      withCredentials: true,
+    });
+  },
+
+  deleteConsProfile(data) {
+    return API.delete("/consultant/avatar", data, {
       headers: { Authorization: "Bearer " + Cookie.get("token") },
       withCredentials: true,
     });

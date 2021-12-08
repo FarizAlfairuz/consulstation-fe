@@ -3,7 +3,7 @@ import ProfileAPI from "api/ProfileAPI";
 import useAPI from "hooks/useAPI";
 import usePersistentState from "hooks/usePersistentState";
 import ConsultantAPI from "api/ConsultantAPI";
-import Cookie from "js-cookie"
+import Cookie from "js-cookie";
 
 function useProfile(role) {
   const [state, dispatch] = useAPI();
@@ -22,7 +22,7 @@ function useProfile(role) {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
           setUsername(res.data.data.username);
           // console.log(res.data.data)
-          Cookie.set("role", res.data.data.role)
+          Cookie.set("role", res.data.data.role);
         })
         .catch(() => {
           dispatch({ type: "FETCH_FAILED" });
@@ -42,46 +42,85 @@ function useProfile(role) {
   const editProfile = (data) => {
     // console.log(data);
     dispatchEdit({ type: "REQUEST" });
-    ProfileAPI.editUserProfile(data)
-      .then((res) => {
-        setUsername(data.username);
-        dispatchEdit({ type: "FETCH_SUCCESS", payload: res.data });
-      })
-      .catch(() => {
-        dispatchEdit({ type: "FETCH_FAILED" });
-      });
+    if (role === "user") {
+      ProfileAPI.editUserProfile(data)
+        .then((res) => {
+          setUsername(data.username);
+          dispatchEdit({ type: "FETCH_SUCCESS", payload: res.data });
+        })
+        .catch(() => {
+          dispatchEdit({ type: "FETCH_FAILED" });
+        });
+    } else {
+      ProfileAPI.editConsProfile(data)
+        .then((res) => {
+          setUsername(data.username);
+          dispatchEdit({ type: "FETCH_SUCCESS", payload: res.data });
+        })
+        .catch(() => {
+          dispatchEdit({ type: "FETCH_FAILED" });
+        });
+    }
   };
 
   const uploadPhoto = (data) => {
-    console.log(data)
+    console.log(data);
     const photo = new FormData();
     photo.append("profilePicture", data.pp[0]);
 
     dispatchPhoto({ type: "REQUEST" });
-    console.log("foto");
-    ProfileAPI.uploadPhotoProfile(photo)
-      .then((response) => {
-        dispatchPhoto({ type: "FETCH_SUCCESS", payload: response.data });
-        console.log(response);
-        setIsEditing(false)
-      })
-      .catch(() => {
-        dispatchPhoto({ type: "FETCH_FAILED" });
-      });
+    if (role === "user") {
+      ProfileAPI.uploadPhotoProfile(photo)
+        .then((response) => {
+          dispatchPhoto({ type: "FETCH_SUCCESS", payload: response.data });
+          console.log(response);
+          setIsEditing(false);
+        })
+        .catch(() => {
+          dispatchPhoto({ type: "FETCH_FAILED" });
+        });
+    } else {
+      ProfileAPI.uploadConsProfile(photo)
+        .then((response) => {
+          dispatchPhoto({ type: "FETCH_SUCCESS", payload: response.data });
+          console.log(response);
+          setIsEditing(false);
+        })
+        .catch(() => {
+          dispatchPhoto({ type: "FETCH_FAILED" });
+        });
+    }
   };
 
   const deletePhoto = () => {
     dispatchDelete({ type: "REQUEST" });
-    ProfileAPI.deletePhotoProfile()
-      .then((response) => {
-        dispatchDelete({ type: "FETCH_SUCCESS", payload: response.data });
-        console.log(response);
-        setIsEditing(false)
-        window.location.reload()
-      })
-      .catch(() => {
-        dispatchDelete({ type: "FETCH_FAILED" });
-      });
+    if (role === "user") {
+      ProfileAPI.deletePhotoProfile()
+        .then((response) => {
+          dispatchDelete({ type: "FETCH_SUCCESS", payload: response.data });
+          console.log(response);
+          setIsEditing(false);
+          window.location.reload();
+        })
+        .catch(() => {
+          dispatchDelete({ type: "FETCH_FAILED" });
+        });
+    } else {
+      ProfileAPI.deleteConsProfile()
+        .then((response) => {
+          dispatchDelete({ type: "FETCH_SUCCESS", payload: response.data });
+          console.log(response);
+          setIsEditing(false);
+          window.location.reload();
+        })
+        .catch(() => {
+          dispatchDelete({ type: "FETCH_FAILED" });
+        });
+    }
+  };
+
+  const changePassword = () => {
+    
   }
 
   useEffect(() => {
@@ -92,7 +131,19 @@ function useProfile(role) {
     };
   }, [getProfile, dispatch]);
 
-  return { state, editState, photoState, getProfile, editProfile, uploadPhoto, username, deletePhoto, deleteState, isEditing, setIsEditing };
+  return {
+    state,
+    editState,
+    photoState,
+    getProfile,
+    editProfile,
+    uploadPhoto,
+    username,
+    deletePhoto,
+    deleteState,
+    isEditing,
+    setIsEditing,
+  };
 }
 
 export default useProfile;
