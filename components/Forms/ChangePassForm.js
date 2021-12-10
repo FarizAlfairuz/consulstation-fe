@@ -25,7 +25,7 @@ function ChangePassForm(props) {
     mode: "onTouched",
   });
 
-  const { changePassword } = useProfile();
+  const { changePassword, passState } = useProfile();
 
   return (
     <form
@@ -40,7 +40,7 @@ function ChangePassForm(props) {
         className="font-nunito text-paragraph-1  bg-gray-200 font-bold text-black py-2 px-3 rounded-lg focus:outline-none"
         {...register("oldPassword", { required: true })}
       />
-      <div className="h-1 px-1">
+      <div className="h-2 px-1">
         {errors["oldPassword"] && (
           <p className="text-xs text-red-600 break-words">
             {errors["oldPassword"].message}
@@ -55,7 +55,7 @@ function ChangePassForm(props) {
         className="font-nunito text-paragraph-1  bg-gray-200 font-bold text-black py-2 px-3 rounded-lg focus:outline-none"
         {...register("newPassword", { required: true })}
       />
-      <div className="h-1 px-1">
+      <div className="h-2 px-1">
         {errors["newPassword"] && (
           <p className="text-xs text-red-600 break-words">
             {errors["newPassword"].message}
@@ -70,7 +70,7 @@ function ChangePassForm(props) {
         className="font-nunito text-paragraph-1  bg-gray-200 font-bold text-black py-2 px-3 rounded-lg focus:outline-none"
         {...register("confirmNewPassword", { required: true })}
       />
-      <div className="h-1 px-1">
+      <div className="h-2 px-1">
         {errors["confirmNewPassword"] && (
           <p className="text-xs text-red-600 break-words">
             {errors["confirmNewPassword"].message}
@@ -85,6 +85,7 @@ function ChangePassForm(props) {
           color="bg-white"
           border="border border-black"
           onClick={cancel}
+          disabled={passState.disabled}
         >
           Cancel
         </Button>

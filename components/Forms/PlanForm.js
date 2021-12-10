@@ -21,7 +21,7 @@ function PlanForm(props) {
     mode: "onTouched",
   });
 
-  const { createPlan } = usePartnership();
+  const { createPlan, planState } = usePartnership();
 
   return (
     <form
@@ -36,7 +36,7 @@ function PlanForm(props) {
         className="font-nunito text-paragraph-1  bg-gray-200 font-bold text-black py-2 px-3 rounded-lg focus:outline-none"
         {...register("title", { required: true })}
       />
-      <div className="h-1 px-1">
+      <div className="h-2 px-1">
         {errors["title"] && (
           <p className="text-xs text-red-600 break-words">
             {errors["title"].message}
@@ -51,7 +51,7 @@ function PlanForm(props) {
         rows="5"
         {...register("description", { required: true })}
       ></textarea>
-      <div className="h-1 px-1">
+      <div className="h-2 px-1">
         {errors["description"] && (
           <p className="text-xs text-red-600 break-words">
             {errors["description"].message}
@@ -70,7 +70,7 @@ function PlanForm(props) {
         <option value="75000">Rp. 75.000</option>
         <option value="100000">Rp. 100.000</option>
       </select>
-      <div className="h-1 px-1">
+      <div className="h-2 px-1">
         {errors["price"] && (
           <p className="text-xs text-red-600 break-words">
             {errors["price"].message}
@@ -84,6 +84,7 @@ function PlanForm(props) {
           color="bg-white"
           border="border border-black"
           onClick={cancel}
+          disabled={planState.disabled}
         >
           Cancel
         </Button>

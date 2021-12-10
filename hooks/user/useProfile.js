@@ -5,6 +5,7 @@ import usePersistentState from "hooks/usePersistentState";
 import ConsultantAPI from "api/ConsultantAPI";
 import Cookie from "js-cookie";
 import { useLogout } from "hooks/user/useAuth";
+import Swal from "sweetalert2";
 
 function useProfile(role) {
   const [state, dispatch] = useAPI();
@@ -15,7 +16,7 @@ function useProfile(role) {
   const [isEditing, setIsEditing] = useState(false);
   const [username, setUsername] = usePersistentState("username", null);
 
-  const { logout } = useLogout()
+  const { logout } = useLogout();
 
   const getProfile = useCallback(() => {
     // console.log(role)
@@ -125,11 +126,16 @@ function useProfile(role) {
 
   const changePassword = (data) => {
     dispatchPass({ type: "REQUEST" });
-    if(role === "user") {
+    if (role === "user") {
       ProfileAPI.changePassUser(data)
         .then((response) => {
           dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
-          logout()
+          Swal.fire({
+            icon: "success",
+            title: "Password berhasil diganti, silakan login kembali",
+          }).then(() => {
+            logout();
+          });
         })
         .catch(() => {
           dispatchPass({ type: "FETCH_FAILED" });
@@ -138,13 +144,18 @@ function useProfile(role) {
       ProfileAPI.changePassCons(data)
         .then((response) => {
           dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
-          logout()
+          Swal.fire({
+            icon: "success",
+            title: "Password berhasil diganti, silakan login kembali",
+          }).then(() => {
+            logout();
+          });
         })
         .catch(() => {
           dispatchPass({ type: "FETCH_FAILED" });
         });
     }
-  }
+  };
 
   useEffect(() => {
     getProfile();
@@ -167,7 +178,7 @@ function useProfile(role) {
     isEditing,
     setIsEditing,
     changePassword,
-    passState
+    passState,
   };
 }
 
