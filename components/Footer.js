@@ -11,21 +11,21 @@ function Footer() {
             <div>station</div>
           </div>
           <div className="flex flex-wrap justify-between sm:justify-end space-x-2 ">
-            <div>facebook</div>
-            <div>twitter</div>
-            <div>youtube</div>
-            <div>instagram</div>
+            <a href="https://www.facebook.com/">Facebook</a>
+            <a href="https://twitter.com/home">Twitter</a>
+            <a href="https://www.youtube.com/">Youtube</a>
+            <a href="https://www.instagram.com/">Instagram</a>
           </div>
         </div>
         <div className="flex justify-center sm:justify-between flex-wrap gap-4 items-center font-nunito font-bold text-lg">
           <div className="flex flex-col flex-wrap w-96 space-y-2">
             <div className="flex flex-wrap gap-2 justify-center sm:justify-between">
-              <div>about us</div>
-              <div>contact us</div>
+              <div>About Us</div>
+              <div>Contact Us</div>
             </div>
             <div className="flex flex-wrap gap-2 justify-center sm:justify-between">
-              <div>customer</div>
-              <div>blog</div>
+              <div>Customer</div>
+              <div>Blog</div>
             </div>
           </div>
           <div className="flex flex-col items-center sm:items-end space-y-2 ">

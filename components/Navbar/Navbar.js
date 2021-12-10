@@ -35,7 +35,7 @@ function Navbar() {
                 <a>Article</a>
               </Link>
             </li>
-            <li>Help</li>
+            {/* <li>Help</li> */}
           </ul>
         </div>
         <div className="hidden md:block w-2/6 ">
