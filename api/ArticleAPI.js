@@ -6,6 +6,10 @@ const ArticleAPI = {
     return API.get("/articles");
   },
 
+  searchArticle(query) {
+    return API.get("/articles?limit=2&page=0&search=" + query);
+  },
+
   getById(id) {
     return API.get(`/article/${id}`)
   },

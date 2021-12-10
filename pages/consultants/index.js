@@ -29,7 +29,7 @@ function ConsultantsPage(props) {
     searchConsultant(search)
   }
 
-  console.log(state.data.data)
+  // console.log(state.data.data)
 
   return (
     <Layout>

@@ -36,6 +36,18 @@ function useArticle() {
       });
   };
 
+  const searchArticles = (query) => {
+    dispatch({ type: "REQUEST" });
+
+    ConsultantAPI.searchArticle(query)
+      .then((res) => {
+        dispatch({ type: "FETCH_SUCCESS", payload: res.data });
+      })
+      .catch(() => {
+        dispatch({ type: "FETCH_FAILED" });
+      });
+  }
+
   useEffect(() => {
     getArticles()
 
@@ -44,7 +56,7 @@ function useArticle() {
     }
   }, [dispatch, getArticles])
 
-  return { state, newState, newArticle };
+  return { state, newState, newArticle, searchArticles };
 }
 
 export default useArticle;
