@@ -13,7 +13,7 @@ function useArticle() {
     ArticleAPI.getArticle()
     .then((res) => {
       dispatch({ type: "FETCH_SUCCESS", payload: res.data });
-      console.log(res);
+      // console.log(res);
     })
     .catch((err) => {
       console.log(err)
