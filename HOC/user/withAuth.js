@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import TokenAPI from "api/TokenAPI";
 import API from "api/API";
+import Swal from "sweetalert2";
 
 const withAuth = (WrappedComponent) => {
   return (props) => {
@@ -11,45 +12,16 @@ const withAuth = (WrappedComponent) => {
     useEffect(() => {
       const token = Cookie.get("token");
       const refreshToken = Cookie.get("refreshToken");
-      // console.log(refreshToken)
 
       if (!token) {
         setVerified(false);
-        router.replace("/");
-        // console.log("hehe");
-        // if (refreshToken) {
-        //   API.post("/token", { refreshToken })
-        //     .then((res) => {
-        //       console.log(res);
-        //       Cookie.set("refreshToken", res.data.refreshToken);
-        //       Cookie.set("token", res.data.accessToken);
-        //     })
-        //     .catch(() => {
-        //       console.log("Something wrong!");
-        //     });
-        // } else {
-        //   setVerified(false);
-        //   router.replace("/");
-        // }
+        Swal.fire({
+          icon: "error",
+          title: "Mohon login terlebih dahulu",
+        }).then(() => {
+          router.replace("/sign-in");
+        });
       } else {
-        // API.interceptors.response.use(
-        //   (response) => response,
-        //   (error) => {
-        //     if (error.response && error.response.status === 403) {
-        //       TokenAPI.getToken(refreshToken)
-        //         .then(() => {
-        //           setVerified(true);
-        //         })
-        //         .catch(() => {
-        //           Cookie.remove("token");
-        //           Cookie.remove("refreshToken");
-        //           Cookie.remove("logged");
-        //         });
-        //       return Promise.reject();
-        //     }
-        //     return Promise.reject(error);
-        //   }
-        // );
         setVerified(true);
       }
     }, []);
