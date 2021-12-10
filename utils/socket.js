@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { io } from "socket.io-client";
 
-const URL = process.env.BASE_URL
+const URL = process.env.SOCKET_URL
 const socket = io(URL, { autoConnect: false })
 
 const SocketContext = createContext({})

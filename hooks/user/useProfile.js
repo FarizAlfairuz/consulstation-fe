@@ -4,6 +4,7 @@ import useAPI from "hooks/useAPI";
 import usePersistentState from "hooks/usePersistentState";
 import ConsultantAPI from "api/ConsultantAPI";
 import Cookie from "js-cookie";
+import { useLogout } from "hooks/user/useAuth";
 
 function useProfile(role) {
   const [state, dispatch] = useAPI();
@@ -13,6 +14,8 @@ function useProfile(role) {
   const [passState, dispatchPass] = useAPI();
   const [isEditing, setIsEditing] = useState(false);
   const [username, setUsername] = usePersistentState("username", null);
+
+  const { logout } = useLogout()
 
   const getProfile = useCallback(() => {
     // console.log(role)
@@ -126,6 +129,7 @@ function useProfile(role) {
       ProfileAPI.changePassUser(data)
         .then((response) => {
           dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
+          logout()
         })
         .catch(() => {
           dispatchPass({ type: "FETCH_FAILED" });
@@ -134,6 +138,7 @@ function useProfile(role) {
       ProfileAPI.changePassCons(data)
         .then((response) => {
           dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
+          logout()
         })
         .catch(() => {
           dispatchPass({ type: "FETCH_FAILED" });
@@ -161,7 +166,8 @@ function useProfile(role) {
     deleteState,
     isEditing,
     setIsEditing,
-    changePassword
+    changePassword,
+    passState
   };
 }
 
