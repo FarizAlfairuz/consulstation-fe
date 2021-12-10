@@ -19,20 +19,22 @@ function LogStatus() {
     </div>
   ) : (
     <div className="flex justify-end items-center space-x-2">
-      <Button
-        color="bg-white"
-        textColor="text-black"
-        border="border border-black"
-      >
-        <Link href="/sign-in">
-          <a>Sign In</a>
-        </Link>
-      </Button>
-      <Button>
-        <Link href="/sign-up">
-          <a>Sign Up</a>
-        </Link>
-      </Button>
+      <Link href="/sign-in">
+        <a>
+          <Button
+            color="bg-white"
+            textColor="text-black"
+            border="border border-black"
+          >
+            Sign In
+          </Button>
+        </a>
+      </Link>
+      <Link href="/sign-up">
+        <a>
+          <Button>Sign Up</Button>
+        </a>
+      </Link>
     </div>
   );
 }

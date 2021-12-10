@@ -4,8 +4,8 @@ import Link from "next/link";
 import Cookie from "js-cookie";
 
 function Footer() {
-  const  logged = Cookie.get("logged");
-  
+  const logged = Cookie.get("logged");
+
   return (
     <Container bgColor="bg-white">
       <div className="flex flex-col space-y-10 relative">
@@ -36,11 +36,11 @@ function Footer() {
             <h6 className="font-nunito font-bold text-sm">
               Are you a consultant?
             </h6>
-            <Button padding="px-6 py-1 sm:px-14 sm:py-2">
-              <Link href={logged ? '/profile/user' : '/sign-up'}>
-                <a>Register</a>
-              </Link>
-            </Button>
+            <Link href={logged ? "/profile/user" : "/sign-up"}>
+              <a>
+                <Button padding="px-6 py-1 sm:px-14 sm:py-2">Register</Button>
+              </a>
+            </Link>
           </div>
         </div>
         <div className=" w-1/2">
