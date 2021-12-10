@@ -88,7 +88,7 @@ function PlanForm(props) {
         >
           Cancel
         </Button>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={planState.disabled}>Submit</Button>
       </div>
     </form>
   );

@@ -89,7 +89,7 @@ function ChangePassForm(props) {
         >
           Cancel
         </Button>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={passState.disabled}>Submit</Button>
       </div>
     </form>
   );
