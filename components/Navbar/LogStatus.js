@@ -15,12 +15,6 @@ function LogStatus() {
 
   return logged ? (
     <div className="flex justify-end space-x-6 items-center">
-      {/* <Link href="/profile/user">
-        <a className="font-bold">Hi, {username !== null && username}</a>
-      </Link>
-      <div>
-        <Button onClick={logout}>Logout</Button>
-      </div> */}
       <Dropdown username={username} logout={logout} />
     </div>
   ) : (

@@ -1,14 +1,11 @@
-// import Button from "../Button";
 import Link from "next/link";
-// import Cookie from "js-cookie";
 import dynamic from "next/dynamic";
-// import { MenuIcon } from "@heroicons/react/solid";
-// import MenuDropdown from "./MenuDropdown";
+
 
 function Navbar() {
   const LogStatus = dynamic(() => import("components/Navbar/LogStatus"));
   const MenuDropdown = dynamic(() => import("components/Navbar/MenuDropdown"))
-  // const logged = Cookie.get("logged");
+  
   return (
     <nav className="w-full sticky top-0 z-20  py-8 bg-white shadow-md">
       <div className="w-11/12 md:w-4/5 mx-auto flex justify-between items-center">
