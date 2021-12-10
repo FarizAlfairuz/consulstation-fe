@@ -2,7 +2,7 @@ function ProfileForm(props) {
   const { id, name, type, label, error, register, required, disabled } = props;
 
   return (
-    <div id={id} className="space-y-2">
+    <div id={id} className="space-y-3">
       <p className="font-nunito text-base">{label}</p>
       <div className=" w-3/4">
         <input
@@ -14,7 +14,7 @@ function ProfileForm(props) {
           {...register(name, { ...required })}
         />
       </div>
-      <div className="h-1 px-1">
+      <div className="h-2 px-2">
         {error[name] && (
           <p className="text-xs text-red-600 break-words">
             {error[name].message}
