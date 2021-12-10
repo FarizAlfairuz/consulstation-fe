@@ -39,7 +39,7 @@ function useArticle() {
   const searchArticles = (query) => {
     dispatch({ type: "REQUEST" });
 
-    ConsultantAPI.searchArticle(query)
+    ArticleAPI.searchArticle(query)
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
       })
