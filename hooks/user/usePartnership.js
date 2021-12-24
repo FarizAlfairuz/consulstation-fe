@@ -31,7 +31,7 @@ function usePartnership(page, role) {
         Swal.fire({
           icon: "error",
           title: "Gagal mendaftar!",
-          text: "Nomor telepon tidak boleh kosong",
+          text: res.data.errors,
         }).then(() => {
           router.replace("/profile/user");
         })

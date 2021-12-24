@@ -138,7 +138,13 @@ function useProfile(role) {
           });
         })
         .catch(() => {
-          dispatchPass({ type: "FETCH_FAILED" });
+          Swal.fire({
+            icon: "error",
+            title: res.data.message,
+            text: res.data.errors,
+          }).then(() => {
+            dispatchPass({ type: "FETCH_FAILED" });
+          });
         });
     } else {
       ProfileAPI.changePassCons(data)
@@ -152,7 +158,13 @@ function useProfile(role) {
           });
         })
         .catch(() => {
-          dispatchPass({ type: "FETCH_FAILED" });
+          Swal.fire({
+            icon: "error",
+            title: res.data.message,
+            text: res.data.errors,
+          }).then(() => {
+            dispatchPass({ type: "FETCH_FAILED" });
+          });
         });
     }
   };
