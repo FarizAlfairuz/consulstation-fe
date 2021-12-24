@@ -134,7 +134,8 @@ function useProfile(role) {
             icon: "success",
             title: "Password berhasil diganti, silakan login kembali",
           }).then(() => {
-            logout();
+            // logout();
+            console.log(response)
           });
         })
         .catch(() => {
@@ -154,7 +155,8 @@ function useProfile(role) {
             icon: "success",
             title: "Password berhasil diganti, silakan login kembali",
           }).then(() => {
-            logout();
+            // logout();
+            console.log(response)
           });
         })
         .catch(() => {

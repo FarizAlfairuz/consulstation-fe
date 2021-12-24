@@ -99,7 +99,7 @@ function ContractRegristrationPage() {
             name="cv"
             {...register("cv", { required: true })}
           />
-          {upload[0].name && <div>{upload[0].name}</div>}
+          {upload && upload[0].name && <div>{upload[0].name}</div>}
           {errors["cv"] && (
             <p className="text-xs text-red-600 break-words">
               {errors["cv"].message}
