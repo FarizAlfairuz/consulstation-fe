@@ -11,9 +11,12 @@ import usePartnership from "hooks/user/usePartnership";
 const FILE_SIZE = 2000000;
 const SUPPORTED_FORMATS = ["application/pdf"];
 
+const date = new Date()
+const year = date.getFullYear()
+
 const schema = yup.object().shape({
   npwp: yup.string().required(),
-  startingYear: yup.string().required(),
+  startingYear: yup.number().required().min(1990, "Tidak bisa kurang dari tahun 1990").max(year, "Tidak bisa lebih dari tahun sekarang"),
   // phone: yup.string().required(),
   cv: yup
     .mixed()
@@ -99,7 +102,7 @@ function ContractRegristrationPage() {
             name="cv"
             {...register("cv", { required: true })}
           />
-          {upload && upload[0].name && <div>{upload[0].name}</div>}
+          {upload && upload[0] && <div>{upload[0].name}</div>}
           {errors["cv"] && (
             <p className="text-xs text-red-600 break-words">
               {errors["cv"].message}

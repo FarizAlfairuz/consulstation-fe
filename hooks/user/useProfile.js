@@ -135,8 +135,8 @@ function useProfile(role) {
               icon: "success",
               title: "Password berhasil diganti, silakan login kembali",
             }).then(() => {
-              logout();
-              // console.log(response)
+              // logout();
+              console.log(response);
             });
           } else {
             Swal.fire({
@@ -148,8 +148,15 @@ function useProfile(role) {
             });
           }
         })
-        .catch(() => {
-          dispatchPass({ type: "FETCH_FAILED" });
+        .catch((err) => {
+          // console.log(err.response)
+          Swal.fire({
+            icon: "error",
+            title: err.response.data.message,
+            text: err.response.data.error,
+          }).then(() => {
+            dispatchPass({ type: "FETCH_FAILED" });
+          });
         });
     } else {
       ProfileAPI.changePassCons(data)
@@ -173,8 +180,15 @@ function useProfile(role) {
             });
           }
         })
-        .catch(() => {
+        .catch((err) => {
           dispatchPass({ type: "FETCH_FAILED" });
+          Swal.fire({
+            icon: "error",
+            title: err.response.data.message,
+            text: err.response.data.error,
+          }).then(() => {
+            dispatchPass({ type: "FETCH_FAILED" });
+          });
         });
     }
   };
