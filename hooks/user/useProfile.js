@@ -135,8 +135,8 @@ function useProfile(role) {
               icon: "success",
               title: "Password berhasil diganti, silakan login kembali",
             }).then(() => {
-              // logout();
-              console.log(response);
+              logout();
+              // console.log(response);
             });
           } else {
             Swal.fire({
