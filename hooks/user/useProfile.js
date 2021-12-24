@@ -140,8 +140,8 @@ function useProfile(role) {
         .catch(() => {
           Swal.fire({
             icon: "error",
-            title: res.data.message,
-            text: res.data.errors,
+            title: response.data.message,
+            text: response.data.errors,
           }).then(() => {
             dispatchPass({ type: "FETCH_FAILED" });
           });
@@ -160,8 +160,8 @@ function useProfile(role) {
         .catch(() => {
           Swal.fire({
             icon: "error",
-            title: res.data.message,
-            text: res.data.errors,
+            title: response.data.message,
+            text: response.data.errors,
           }).then(() => {
             dispatchPass({ type: "FETCH_FAILED" });
           });
