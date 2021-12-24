@@ -40,7 +40,7 @@ function UserProfilePage() {
   const [upload, setUpload] = useState(null);
 
   const { plans } = usePartnership("profile", role);
-  console.log(state);
+  // console.log(state);
 
   const {
     register,
