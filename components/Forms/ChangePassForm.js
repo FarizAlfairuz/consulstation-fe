@@ -15,7 +15,7 @@ const schema = yup.object().shape({
 });
 
 function ChangePassForm(props) {
-  const { cancel } = props;
+  const { cancel, role } = props;
   const {
     register,
     handleSubmit,
@@ -25,7 +25,7 @@ function ChangePassForm(props) {
     mode: "onTouched",
   });
 
-  const { changePassword, passState } = useProfile();
+  const { changePassword, passState } = useProfile(role);
 
   return (
     <form

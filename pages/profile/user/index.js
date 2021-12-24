@@ -161,7 +161,7 @@ function UserProfilePage() {
         {/* Edit Password */}
         <div className="flex flex-col space-y-3 bg-white p-6 rounded-lg">
           {isChange ? (
-            <ChangePassForm cancel={() => setIsChange(false)} />
+            <ChangePassForm cancel={() => setIsChange(false)} role={role} />
           ) : (
             <div className="flex justify-between items-center ">
               <div className="space-y-1">
