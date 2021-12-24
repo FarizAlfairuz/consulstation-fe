@@ -9,7 +9,7 @@ function usePartnership(page, role) {
   const [planState, dispatchPlan] = useAPI();
   const [plans, dispatchPlans] = useAPI();
 
-  const router = useRouter()
+  const router = useRouter();
   const partnershipRequest = (data) => {
     console.log(data);
     const file = data.cv[0];
@@ -19,12 +19,16 @@ function usePartnership(page, role) {
     reqData.append("phone", data.phone);
     reqData.append("cv", file);
     dispatch({ type: "REQUEST" });
-    PartnershipAPI
-      .request(reqData)
+    PartnershipAPI.request(reqData)
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
         // console.log(res);
-        router.replace("/profile/user")
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil mendaftar konsultan",
+        }).then(() => {
+          router.replace("/profile/user");
+        });
       })
       .catch(() => {
         dispatch({ type: "FETCH_FAILED" });
@@ -34,7 +38,7 @@ function usePartnership(page, role) {
           text: res.data.errors,
         }).then(() => {
           router.replace("/profile/user");
-        })
+        });
       });
   };
 
@@ -45,12 +49,12 @@ function usePartnership(page, role) {
         dispatchPlan({ type: "FETCH_SUCCESS", payload: res.data });
         // console.log(res);
         // router.replace("/profile/user")
-        window.location.reload()
+        window.location.reload();
       })
       .catch(() => {
         dispatchPlan({ type: "FETCH_FAILED" });
       });
-  }
+  };
 
   const getPlans = useCallback(() => {
     dispatchPlans({ type: "REQUEST" });
@@ -61,15 +65,15 @@ function usePartnership(page, role) {
       .catch(() => {
         dispatchPlans({ type: "FETCH_FAILED" });
       });
-  }, [dispatchPlans])
+  }, [dispatchPlans]);
 
   if (page === "profile" && role === "consultant") {
     useEffect(() => {
-      getPlans()
+      getPlans();
       return () => {
         dispatchPlans({ type: "RESET" });
-      }
-    }, [getPlans, dispatchPlans])
+      };
+    }, [getPlans, dispatchPlans]);
   }
 
   return { state, partnershipRequest, planState, createPlan, plans };

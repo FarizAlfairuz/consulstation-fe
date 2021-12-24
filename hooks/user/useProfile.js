@@ -129,44 +129,52 @@ function useProfile(role) {
     if (role === "user") {
       ProfileAPI.changePassUser(data)
         .then((response) => {
-          dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
-          Swal.fire({
-            icon: "success",
-            title: "Password berhasil diganti, silakan login kembali",
-          }).then(() => {
-            // logout();
-            console.log(response)
-          });
+          if (response.data.success) {
+            dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
+            Swal.fire({
+              icon: "success",
+              title: "Password berhasil diganti, silakan login kembali",
+            }).then(() => {
+              logout();
+              // console.log(response)
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: response.data.message,
+              text: response.data.errors,
+            }).then(() => {
+              dispatchPass({ type: "FETCH_FAILED" });
+            });
+          }
         })
         .catch(() => {
-          Swal.fire({
-            icon: "error",
-            title: response.data.message,
-            text: response.data.errors,
-          }).then(() => {
-            dispatchPass({ type: "FETCH_FAILED" });
-          });
+          dispatchPass({ type: "FETCH_FAILED" });
         });
     } else {
       ProfileAPI.changePassCons(data)
         .then((response) => {
-          dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
-          Swal.fire({
-            icon: "success",
-            title: "Password berhasil diganti, silakan login kembali",
-          }).then(() => {
-            // logout();
-            console.log(response)
-          });
+          if (response.data.success) {
+            dispatchPass({ type: "FETCH_SUCCESS", payload: response.data });
+            Swal.fire({
+              icon: "success",
+              title: "Password berhasil diganti, silakan login kembali",
+            }).then(() => {
+              logout();
+              // console.log(response)
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: response.data.message,
+              text: response.data.errors,
+            }).then(() => {
+              dispatchPass({ type: "FETCH_FAILED" });
+            });
+          }
         })
         .catch(() => {
-          Swal.fire({
-            icon: "error",
-            title: response.data.message,
-            text: response.data.errors,
-          }).then(() => {
-            dispatchPass({ type: "FETCH_FAILED" });
-          });
+          dispatchPass({ type: "FETCH_FAILED" });
         });
     }
   };
