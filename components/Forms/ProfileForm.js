@@ -14,7 +14,7 @@ function ProfileForm(props) {
           {...register(name, { ...required })}
         />
       </div>
-      <div className="h-2 px-2">
+      <div className="px-2">
         {error[name] && (
           <p className="text-xs text-red-600 break-words">
             {error[name].message}

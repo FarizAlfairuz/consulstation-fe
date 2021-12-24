@@ -29,7 +29,7 @@ import { useEffect, useState } from "react";
 // });
 
 function PhotoForm(props) {
-  const { setUpload } = props;
+  const { setUpload, role } = props;
   // const [isEditing, setIsEditing] = useState(false);
 
   const {
@@ -42,7 +42,7 @@ function PhotoForm(props) {
     mode: "onTouched",
   });
 
-  const { photoState, uploadPhoto, deletePhoto, deleteState, isEditing, setIsEditing } = useProfile();
+  const { photoState, uploadPhoto, deletePhoto, deleteState, isEditing, setIsEditing } = useProfile(role);
   const foto = watch("pp");
 
   useEffect(() => {

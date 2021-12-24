@@ -155,7 +155,7 @@ function UserProfilePage() {
               />
             ))}
           </form>
-          <PhotoForm setUpload={setUpload} />
+          <PhotoForm setUpload={setUpload} role={role} />
         </div>
 
         {/* Edit Password */}
